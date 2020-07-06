@@ -1,0 +1,79 @@
+<!--
+  I'm going to be at a doctor's appointment during Lab Time tommorow so I wanted to work beforehand. I made the game prototype and the webpage. It still needs to look better and have some styling added. - Sean G 7/6/20 4:20pm
+-->
+
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<div class="jumbotron">
+  <h1>
+    Find The Number!
+  </h1>
+  <h3>
+    Guess a number from 1-1000.
+  </h3>
+</div>
+
+<hr>
+
+<body>
+  <h4 id="isCorrect"></h4>
+  <p id="yourGuess"></p>
+  <p id="guesses"></p>
+  <script>
+  
+    var numberGen = (Math.floor(Math.random() * 1000)) + 1;
+    var numberGuess = 0;
+    var numGuesses = 0;
+    document.getElementById("isCorrect").innerHTML = "Game Started";
+    document.getElementById("yourGuess").innerHTML = "Guess A Number";
+    document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
+    
+    function changeGuess() {
+      numberGuess = document.getElementById("guess").value;
+      if (numberGuess > 1000 || numberGuess < 1) {
+        document.getElementById("isCorrect").innerHTML = "YOUR GUESS MUST BE BETWEEN 1 AND 1000";
+      } else {
+        numGuesses++;
+        document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
+        document.getElementById("yourGuess").innerHTML = "You Guessed: " + numberGuess;
+        if (numberGuess == numberGen) {
+          document.getElementById("isCorrect").innerHTML = "The Number Was: " + numberGen + ". You Guessed The Number in " + numGuesses + " Guesses!";
+        }
+    
+        if (numberGuess > numberGen) {
+          document.getElementById("isCorrect").innerHTML = "The Number is Less Than " + numberGuess;
+        }
+      
+        if (numberGuess < numberGen) {
+          document.getElementById("isCorrect").innerHTML = "The Number is Greater Than " + numberGuess;
+        }
+      }
+    }
+    
+    function resetGame() {
+      var numberGen = (Math.floor(Math.random() * 1000)) + 1;
+      var numberGuess = 0;
+      var numGuesses = 0;
+      document.getElementById("isCorrect").innerHTML = "Game Has Been Reset";
+      document.getElementById("yourGuess").innerHTML = "Guess A Number";
+      document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
+    }
+    
+  </script>
+  
+  <hr>
+  
+  <div>
+    Enter your guess.
+  </div>
+  <input type="number" id="guess"></input>
+  <br>
+  <button type="button" onclick="changeGuess()">Submit</button>
+  <br>
+  <br>
+  <button type="button" onclick="resetGame()">Reset The Game</button>
+
+</body>
+
+<%- include('bootfooter') -%>
