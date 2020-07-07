@@ -55,6 +55,10 @@ app.get("/find-the-number", (req, res) => {
   res.render("find-the-number");
 });
 
+app.get("/game-2", (req, res) => {
+  res.render("game-2");
+});
+
 // Don't change anything below here ...
 
 // here we catch 404 errors and forward to error handler
