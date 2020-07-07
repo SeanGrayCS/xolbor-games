@@ -12,13 +12,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.4/mobile-detect.min.js"></script>
    
     <!--
-      Uses mobile-detect.js to check if the client is on a mobile device, a tablet, or a browser, then runs the correct CSS for the device type. - Sean G 7/6/20 8:30pm
+      Uses mobile-detect.js to check if the client is on a phone, a tablet, or a browser, then runs the correct CSS for the device type. - Sean G 7/6/20 8:30pm
     -->
     <script>
       window.onload = function() {
       var md = new MobileDetect(window.navigator.userAgent);
-      if (md.mobile()===null) {
-        //Not Mobile
+      if (md.phone()===null) {
+        //Not Phone
         if (md.tablet()===null) {
           console.log("Browser");
           //Browser
@@ -29,9 +29,9 @@
           document.getElementById("css").innerHTML = "<link rel='stylesheet' href='/stylesheets/style-tablet.css' />";
         }
       } else {
-        console.log("Mobile");
-        //Mobile
-        document.getElementById("css").innerHTML = "<link rel='stylesheet' href='/stylesheets/style-mobile.css' />";
+        console.log("Phone");
+        //Phone
+        document.getElementById("css").innerHTML = "<link rel='stylesheet' href='/stylesheets/style-phone.css' />";
       }
       }
     </script>
