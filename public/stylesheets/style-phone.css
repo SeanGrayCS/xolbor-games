@@ -1,5 +1,5 @@
 /*
- * CSS Styling for a Mobile Device
+ * CSS Styling for a Phone
  * Added by Sean G 7/6/20 9:30pm
 */
 
@@ -9,7 +9,7 @@ body {
 }
 
 h1 {
-  font-size: 2m;
+  font-size: 2em;
 }
 
 h2 {
@@ -25,7 +25,7 @@ h4 {
 }
 
 h5 {
-  font-size: .83em;
+  font-size: 1.45em;
 }
 
 h6 {
@@ -37,5 +37,9 @@ a {
 }
 
 li {
-  font-size: 1.5em;
+  font-size: 1.25em;
+}
+
+strong {
+  font-size: 1.17em;
 }
