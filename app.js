@@ -59,6 +59,17 @@ app.get("/game-2", (req, res) => {
   res.render("game-2");
 });
 
+app.get("/post-game-survey", (req, res) => {
+  res.render("post-game-survey");
+});
+
+app.post("/showformdata", (req, res) => {
+  res.json(req.body)
+})
+
+app.get("/sign-in", (req, res) => {
+  res.render("sign-in");
+
 // Don't change anything below here ...
 
 // here we catch 404 errors and forward to error handler

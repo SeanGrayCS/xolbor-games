@@ -1,3 +1,7 @@
+<!--
+  Template for New Game Pages: Copy-Paste This into the Page and Make Changes as Necessary. - Sean G 7/7/20
+-->
+
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
@@ -17,5 +21,4 @@
   -->  
 </body>
 
-<%- include('link-to-survey') -%>
 <%- include('bootfooter') -%>

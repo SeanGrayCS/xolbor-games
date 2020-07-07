@@ -25,7 +25,7 @@ h4 {
 }
 
 h5 {
-  font-size: 1.04em;
+  font-size: 1.3em;
 }
 
 h6 {
@@ -42,4 +42,16 @@ li {
 
 strong {
   font-size: 1.46em;
+}
+
+.button {
+  font: 14px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
 }

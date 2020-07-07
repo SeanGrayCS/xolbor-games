@@ -1,7 +1,3 @@
-<!--
-  I'm going to be at a doctor's appointment during Lab Time tommorow so I wanted to work beforehand. I made the game prototype and the webpage. It still needs to look better and have some styling added. - Sean G 7/6/20 4:20pm
--->
-
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
@@ -20,12 +16,32 @@
 
 <hr>
 
+<audio controls autoplay>
+  <source src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FRick-Astley-Never-Gonna-Give-You-Up.mp3?v=1594130705666" type="audio/mpeg">
+  Your Crappy, Outdated Browser Saved You From a Rickroll. Congrats. <!-- rip me :( -->
+</audio>
+
+<hr>
+
 <body>
   <p><strong id="isCorrect"></strong></p>
   <p id="yourGuess"></p>
   <p id="guesses"></p>
-  <script>
+    
+  <hr>
   
+  <div>
+    Enter your guess.
+  </div>
+  <input type="number" id="guess" min="1" max="1000">
+  <br>
+  <button type="button" onclick="changeGuess()">Submit</button>
+  <br>
+  <br>
+  <button type="button" onclick="resetGame()">Reset The Game</button>
+  <hr>
+  
+  <script>
     var numberGen = (Math.floor(Math.random() * 1000)) + 1;
     var numberGuess = 0;
     var numGuesses = 0;
@@ -65,20 +81,8 @@
     }
     
   </script>
-  
-  <hr>
-  
-  <div>
-    Enter your guess.
-  </div>
-  <input type="number" id="guess"></input>
-  <br>
-  <button type="button" onclick="changeGuess()">Submit</button>
-  <br>
-  <br>
-  <button type="button" onclick="resetGame()">Reset The Game</button>
-  <hr>
 
 </body>
 
+<%- include('link-to-survey') -%>
 <%- include('bootfooter') -%>
