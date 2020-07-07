@@ -9,7 +9,33 @@
     <!-- CSS for Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- custom CSS -->
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.4/mobile-detect.min.js"></script>
+   
+    <!--
+      Uses mobile-detect.js to check if the client is on a mobile device, a tablet, or a browser, then runs the correct CSS for the device type. - Sean G 7/6/20 8:30pm
+    -->
+    <script>
+      window.onload = function() {
+      var md = new MobileDetect(window.navigator.userAgent);
+      if (md.mobile()===null) {
+        //Not Mobile
+        if (md.tablet()===null) {
+          console.log("Browser");
+          //Browser
+          document.getElementById("css").innerHTML = "<link rel='stylesheet' href='/stylesheets/style-browser.css' />";
+        } else {
+          console.log("Tablet");
+          //Tablet
+          document.getElementById("css").innerHTML = "<link rel='stylesheet' href='/stylesheets/style-tablet.css' />";
+        }
+      } else {
+        console.log("Mobile");
+        //Mobile
+        document.getElementById("css").innerHTML = "<link rel='stylesheet' href='/stylesheets/style-mobile.css' />";
+      }
+      }
+    </script>
+    <p id="css"></p>
   </head>
   <body>
    <div class="container-fluid">

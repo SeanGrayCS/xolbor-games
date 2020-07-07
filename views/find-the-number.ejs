@@ -10,7 +10,10 @@
     Find The Number!
   </h1>
   <h3>
-    Guess a number from 1-1000.
+    Guess a number from 1-1000. The game will tell you if the correct number is higher or lower than your guess.
+    <br>
+    <br>
+    Keep guessing until you get it right!
   </h3>
 </div>
 
@@ -26,7 +29,7 @@
     var numberGuess = 0;
     var numGuesses = 0;
     document.getElementById("isCorrect").innerHTML = "Game Started";
-    document.getElementById("yourGuess").innerHTML = "Guess A Number";
+    document.getElementById("yourGuess").innerHTML = "Guess a Number From 1-1000.";
     document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
     
     function changeGuess() {
@@ -76,4 +79,4 @@
 
 </body>
 
-<!--<%- include('bootfooter') -%>-->
+<%- include('bootfooter') -%>
