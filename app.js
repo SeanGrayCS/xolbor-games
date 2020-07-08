@@ -68,6 +68,26 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+
+app.get('/forum', (req,res) => {
+  res.render('forum')
+})
+
+let forumPosts = []
+
+app.post("/addToForum", (req,res) => {
+  req.body.date = new Date()
+  req.body.username = res.locals.username
+  forumPosts = forumPosts.concat(req.body)
+  res.locals.posts = forumPosts
+  res.render("forum")
+  //res.json(forumPosts)
+})
+
+
+
+
 // here we start handling routes
 app.get("/", (req, res, next) => {
   res.render("index", { title: "Xolbor Games" });
@@ -85,8 +105,21 @@ app.get("/post-game-survey", (req, res) => {
   res.render("post-game-survey");
 });
 
-app.post("/showformdata", (req, res) => {
-  res.json(req.body);
+let surveyData = [];
+
+app.post("/saveformdata", (req, res) => {
+  req.body.date = new Date()
+  req.body.username = res.locals.username
+  if (req.body.username === null) {
+    req.body.username = "Guest";
+  }
+  surveyData = surveyData.concat(req.body);
+  res.render("index");
+});
+
+app.get("/showformdata", (req, res) => {
+  res.locals.surveys = surveyData;
+  res.render("showformdata");
 })
 
 // Don't change anything below here ...
