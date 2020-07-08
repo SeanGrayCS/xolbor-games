@@ -1,0 +1,84 @@
+<!--
+  GitHub Repository: https://github.com/SeanGrayCS/xolbor-games
+  Note: I need everyone's GitHub usernames so I can add them as a collaborator.
+  - Sean G 7/6/20 10:30pm 
+(Mine is StevenLe2012)
+(mine is midknight5)
+Go here to accept the invite: https://github.com/SeanGrayCS/xolbor-games/invitations
+--> 
+
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<div class="jumbotron">
+  <h1>Post Game Survey</h1>
+  <p>Please share your experience!</p>
+</div>
+
+<form method="post" action="/showformdata">
+  
+  What game did you play?
+  <select name="game">
+    <option>Find the number</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+  </select> 
+  <br>   
+  <br>
+  
+  How did you enjoy the game?
+  <select name="rating">
+    <option>AMAZING!!!</option>
+    <option>Great!</option>
+    <option>OK</option>
+    <option>Meh</option>
+    <option>ewwww get this game outta here :(</option>
+  </select>
+  <br>
+  <br>
+  
+  On a scale of 1-10, would you recommend the game to a friend? 1 being never, 10 being absolutely. <br>
+  <input type="number" name="wouldRecommend" min="1" max="10" placeholder="10">
+  <br>
+  <hr>
+  
+  What could we improve on? <br>
+  <p id="improve"></p>
+  <br>
+  <hr>
+  
+  Any additional comments? <br>
+  <p id="comments"></p>
+  <br>
+  <hr>
+  
+  <!--
+  <a class="button" href="/" onclick="$(this).closest('form').submit()">Submit</a>
+  -->
+  <input type="submit" value="Submit">
+  
+  <br>
+  <br>
+  <input type="reset" value="Reset Answers">
+  
+  <script>
+    window.onload = function() {
+      if (window.deviceType == 0) {
+        document.getElementById("improve").innerHTML = '<textarea name="improvement" rows="10" cols="194"></textarea>';
+        document.getElementById("comments").innerHTML = '<textarea name="additionalComments" rows="10" cols="194"></textarea>';
+      }
+      if (window.deviceType == 1) {
+        document.getElementById("improve").innerHTML = '<textarea name="improvement" rows="10" cols="46"></textarea>';
+        document.getElementById("comments").innerHTML = '<textarea name="additionalComments" rows="10" cols="46"></textarea>';
+      }
+      if (window.deviceType == 2) {
+        document.getElementById("improve").innerHTML = '<textarea name="improvement" rows="10" cols="96"></textarea>';
+        document.getElementById("comments").innerHTML = '<textarea name="additionalComments" rows="10" cols="96"></textarea>';
+      }
+    }
+  </script>
+              
+</form>
+
+<%- include('bootfooter') -%>
