@@ -9,7 +9,25 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-var debug = require("debug")("personalapp:server");
+const debug = require("debug")("personalapp:server");
+
+
+
+// connect to a database
+const mongoose = require( 'mongoose' );
+const mongodb_URI = process.env.MONGODB_URI // was 'mongodb://localhost/hsad'
+mongoose.connect( mongodb_URI, { useNewUrlParser: true } );
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {console.log("we are connected!!!")});
+
+const isLoggedIn = (req,res,next) => {
+  if (res.locals.loggedIn) {
+    next()
+  }
+  else res.redirect('/login')
+}
+
 
 // Now we create the server
 const app = express();
@@ -36,6 +54,10 @@ app.use(
 );
 
 app.use(bodyParser.urlencoded({ extended: false }));
+	
+const auth = require('./routes/auth')  // added by TJH
+app.use(auth)
+
 
 // This is an example of middleware
 // where we look at a request and process it!
@@ -48,7 +70,7 @@ app.use(function(req, res, next) {
 
 // here we start handling routes
 app.get("/", (req, res, next) => {
-  res.render("index", { title: "YellowCartwheel" });
+  res.render("index", { title: "Xolbor Games" });
 });
 
 app.get("/find-the-number", (req, res) => {
@@ -64,11 +86,8 @@ app.get("/post-game-survey", (req, res) => {
 });
 
 app.post("/showformdata", (req, res) => {
-  res.json(req.body)
+  res.json(req.body);
 })
-
-app.get("/sign-in", (req, res) => {
-  res.render("sign-in");
 
 // Don't change anything below here ...
 

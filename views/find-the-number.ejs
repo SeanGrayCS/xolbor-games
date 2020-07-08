@@ -1,29 +1,23 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
-<div class="jumbotron">
+<div class="jumbotron" style="background-color:#86d9f0; color:#173099">
   <h1>
     Find The Number!
   </h1>
-  <br>
   <h3>
     Guess a number from 1-1000. The game will tell you if the correct number is higher or lower than your guess.
     <br>
     <br>
-    Keep guessing until you get it right!
+    Keep guessing until you get it right! 
+    <br>
+    <br>
   </h3>
-</div>
+  <br>
 
-<hr>
-
-<audio controls autoplay>
-  <source src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FRick-Astley-Never-Gonna-Give-You-Up.mp3?v=1594130705666" type="audio/mpeg">
-  Your Crappy, Outdated Browser Saved You From a Rickroll. Congrats. <!-- rip me :( -->
-</audio>
-
-<hr>
-
-<body>
+  <hr>
+  
+  <body>
   <p><strong id="isCorrect"></strong></p>
   <p id="yourGuess"></p>
   <p id="guesses"></p>
@@ -45,7 +39,7 @@
     var numberGen = (Math.floor(Math.random() * 1000)) + 1;
     var numberGuess = 0;
     var numGuesses = 0;
-    document.getElementById("isCorrect").innerHTML = "Game Started";
+    document.getElementById("isCorrect").innerHTML = "Game Started!";
     document.getElementById("yourGuess").innerHTML = "Guess a Number From 1-1000.";
     document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
     
@@ -83,6 +77,23 @@
   </script>
 
 </body>
+</div>
+
+<hr>
+
+<audio controls autoplay>
+  <source src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FRick_Astley_-_Never_Gonna_Give_You_Up_Qoret.com.mp3?v=1594132592488" type="audio/mpeg">
+  Your Crappy, Outdated Browser Saved You From a Rickroll. Congrats. <!-- rip me :( -->
+</audio>
+
+
+<hr>
+
+<div style="color:#f2f2f2">
+  <small>
+    get rickrolled fool hehehe
+  </small>
+</div>
 
 <%- include('link-to-survey') -%>
 <%- include('bootfooter') -%>
