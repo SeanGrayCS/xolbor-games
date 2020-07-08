@@ -1,0 +1,48 @@
+<!--
+  For viewing survey data: https://xolbor-games.glitch.me/showformdata
+-->
+
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<body>
+  <h1>
+    Survey Data: 
+  </h1>
+  
+  <p id="data">
+    
+  </p>
+  
+  <p>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>Username</th>
+        <th>Date</th>
+        <th>Game</th>
+        <th>Rating</th>
+        <th>Would Recommend (1-10)</th>
+        <th>Improvements</th>
+        <th>Comments</th>
+      </thead>
+      <tbody>
+      <% surveys.forEach(x => { %>
+        
+        <tr>
+          <td> <%= x.username %> </td>
+          <td> <%= x.date %> </td>
+          <td> <%= x.game %> </td>
+          <td> <%= x.rating %> </td>
+          <td> <%= x.wouldRecommend %> </td>
+          <td> <%= x.improvement %> </td>
+          <td> <%= x.additionalComments %> </td>
+        </tr>
+      
+      <% }) %>
+      </tbody>
+    </table>
+  </p>
+  
+</body>
+
+<%- include('bootfooter') -%>
