@@ -1,6 +1,6 @@
 /*
  * CSS Styling for a Tablet Device
- * Added by Sean G 7/6/20 9:30pm
+ * Added by Sean G 7/6/20
 */
 
 body {
@@ -37,7 +37,7 @@ a {
 }
 
 li {
-  font-size: 1.4em;
+  font-size: 1em;
 }
 
 strong {
@@ -56,6 +56,18 @@ strong {
   border-left: 1px solid #CCCCCC;
 }
 
-.tab {
-  margin-left: 40px;
+.parent {
+    width: 100%;
+    height: 100%;
+    display: table;
+    text-align: center;
+}
+
+.parent > .child {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.jumbotron {
+  background-color: #E2E2E2;
 }

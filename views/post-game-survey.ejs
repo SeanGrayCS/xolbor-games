@@ -20,7 +20,7 @@ Go here to accept the invite: https://github.com/SeanGrayCS/xolbor-games/invitat
   What game did you play?
   <select name="game">
     <option>Find the number</option>
-    <option>2</option>
+    <option>Mafia</option>
     <option>3</option>
     <option>4</option>
   </select> 
@@ -58,14 +58,17 @@ Go here to accept the invite: https://github.com/SeanGrayCS/xolbor-games/invitat
   <script>
     window.onload = function() {
       if (window.deviceType == 0) {
+        //Browser
         document.getElementById("improve").innerHTML = '<textarea name="improvement" rows="10" cols="194"></textarea>';
         document.getElementById("comments").innerHTML = '<textarea name="additionalComments" rows="10" cols="194"></textarea>';
       }
       if (window.deviceType == 1) {
+        //Phone
         document.getElementById("improve").innerHTML = '<textarea name="improvement" rows="10" cols="46"></textarea>';
         document.getElementById("comments").innerHTML = '<textarea name="additionalComments" rows="10" cols="46"></textarea>';
       }
       if (window.deviceType == 2) {
+        //Tablet
         document.getElementById("improve").innerHTML = '<textarea name="improvement" rows="10" cols="96"></textarea>';
         document.getElementById("comments").innerHTML = '<textarea name="additionalComments" rows="10" cols="96"></textarea>';
       }

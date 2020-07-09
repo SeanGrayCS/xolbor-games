@@ -1,13 +1,6 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
-<div class="jumbotron">
-  <h2>
-    Play our games. We aren't roblox. We know where you live.
-  </h2>
-</div>
-<hr>
-
 <h5>
  <strong>All Games:</strong> 
 </h5>
@@ -40,7 +33,7 @@
 </div>
 
 <script>
-  window.onload = function() {
+  window.onload = function() { 
       if (window.deviceType == 0) {
         //Browser
         document.getElementById("game1").innerHTML = '<img src="https://www.learningaboutelectronics.com/images/Guess-a-number-from-1-to-10.png" height="275px" alt="Photo of find-the-number"><br><h4>Find the Number</h4>';
@@ -65,4 +58,4 @@
 <hr>
 
 <%- include('link-to-survey') -%>
-<%- include('bootfooter') -%>
+<%- include('bootheader') -%>

@@ -1,0 +1,465 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<div class="jumbotron">
+  <h1>
+    Quiz
+  </h1>
+  <br>
+  <h3>
+    Take The Quiz
+  </h3>
+</div>
+
+<body>
+  
+  <!-- Example:
+           Are you over 18? <br>
+          yes <input type="radio" name="over 18" value="yes"> <br>
+          no <input type="radio" name="over 18" value="no" <br> <br>
+          don't want to say <input type="radio" name="over 18" value="maybe"<br>
+-->
+  
+  <!-- Remember to change the name="Q1" to the question number -->
+  <% if (loggedIn) { %>
+  
+  <div class="row">
+    <div class="col">
+        <h6><strong>  -----Geography----- </strong></h6>
+    </div>
+    <div class="col">
+      <h4 style="text-align:right;">
+        <a href="/quiz-results">Leaderboards</a>
+      </h4>
+    </div>
+  </div>
+  
+  <form method="post" action="/submitQuiz">
+    
+
+    
+    <hr>
+    
+Q1: What is the capital of Chile? <br>
+    Phoenix <input type="radio" name="Q1" value="Phoenix"> <br>
+    Santiago <input type="radio" name="Q1" value="Santiago"> <br> <!-- correct -->
+    Stockholm <input type="radio" name="Q1" value="Stockholm"> <br>
+    Budapest <input type="radio" name="Q1" value="Budapest"> <br>
+    
+    <hr>
+
+Q2: What is the highest mountain in Britain? <br>
+    Appalachian <input type="radio" name="Q2" value="Appalachian"> <br>
+    Makalulu <input type="radio" name="Q2" value="Makalulu"> <br> 
+    Ben Nevis <input type="radio" name="Q2" value="Ben Nevis"> <br> <!-- correct -->
+    Nanga Parbat <input type="radio" name="Q2" value="Nanga Parbat"> <br>
+    
+    <hr>
+    
+Q3: What is the smallest country in the world? <br>
+    Maldives <input type="radio" name="Q3" value="Maldives"> <br>
+    Seychelles <input type="radio" name="Q3" value="Seychelles"> <br>
+    Monaco <input type="radio" name="Q3" value="Monaco"> <br>
+    Vatican City <input type="radio" name="Q3" value="Vatican City"> <br> <!-- correct -->
+    
+    <hr>
+    
+Q4: Alberta is a province of which country? <br>
+    Canada <input type="radio" name="Q4" value="Canada"> <br> <!-- correct -->
+    Brazil <input type="radio" name="Q4" value="Brazil"> <br>
+    USA <input type="radio" name="Q4" value="USA1"> <br>
+    Algeria <input type="radio" name="Q4" value="Algeria"> <br>
+    
+    <hr>
+    
+Q5: How many countries still have the shilling as currency? <br>
+    Three - Kenya, Ethiopia, Uganda <input type="radio" name="Q5" value="Three"> <br> 
+    Four – Kenya, Uganda, Tanzania and Somalia <input type="radio" name="Q5" value="Four"> <br> <!-- correct -->
+    Five - Kenya, Ethiopia, Tanzania, Uganda, Somalia <input type="radio" name="Q5" value="Five"> <br>
+    Six - Kenya, Madagascar, Ethiopia, Uganda, Somalia, Tanzania <input type="radio" name="Q5" value="Six"> <br>
+    
+    <hr>
+
+Q6: Which is the only vowel not used as the first letter in a US State? <br>
+    E <input type="radio" name="Q6" value="E"> <br> <!-- correct -->
+    O <input type="radio" name="Q6" value="O"> <br> 
+    U <input type="radio" name="Q6" value="U"> <br>
+    I <input type="radio" name="Q6" value="I"> <br>
+    
+    <hr>
+
+Q7: What is the largest country in the world? <br>
+    USA <input type="radio" name="Q7" value="USA2"> <br> 
+    China <input type="radio" name="Q7" value="China"> <br> 
+    India <input type="radio" name="Q7" value="India"> <br>
+    Russia <input type="radio" name="Q7" value="Russia"> <br> <!-- correct -->
+    
+    <hr>
+    
+Q8: Where would you find the River Thames? <br>
+    Rome, Italy <input type="radio" name="Q8" value="Rome"> <br> 
+    Paris, France <input type="radio" name="Q8" value="Paris"> <br> 
+    London, UK <input type="radio" name="Q8" value="London"> <br> <!-- correct -->
+    Madrid, Spain <input type="radio" name="Q8" value="Madrid"> <br> 
+    
+    <hr>
+    
+Q9: What is the hottest continent on Earth? <br>
+    Africa <input type="radio" name="Q9" value="Africa"> <br> <!-- correct  -->
+    South America <input type="radio" name="Q9" value="South America"> <br> 
+    Asia <input type="radio" name="Q9" value="Asia"> <br>
+    Europe <input type="radio" name="Q9" value="Europe"> <br>
+    
+    <hr>
+    
+Q10: What is the longest river in the world? <br>
+    Nile River <input type="radio" name="Q10" value="Nile"> <br> <!-- correct -->
+    Congo River <input type="radio" name="Q10" value="Congo"> <br> 
+    Yellow River <input type="radio" name="Q10" value="Yellow"> <br>
+    Lena River <input type="radio" name="Q10" value="Lena"> <br>
+    
+    <hr>
+    
+   <h6><strong> -----History----- </strong></h6>
+    
+    <hr>
+    
+Q11: What did the Romans call Scotland? <br>
+    Caledonia <input type="radio" name="Q11" value="Caledonia"> <br> <!-- correct -->
+    Scots <input type="radio" name="Q11" value="Scots"> <br> 
+    Scottish Lowlands <input type="radio" name="Q11" value="Lowlands"> <br>
+    Scottish Highlands <input type="radio" name="Q11" value="Highlands"> <br>
+    
+    <hr>
+    
+Q12: Who was made Lord Mayor of London In 1397, 1398, 1406 And 1419? <br>
+    Thomas Knolles <input type="radio" name="Q12" value="Knolles"> <br> 
+    Richard Whittington <input type="radio" name="Q12" value="Whittington"> <br> <!-- correct -->
+    William Martin <input type="radio" name="Q12" value="Martin"> <br>
+    William Cauntbrigge <input type="radio" name="Q12" value="Cauntbrigge"> <br>
+    
+    <hr>
+    
+Q13: In which year was Joan of Arc burned at the stake? <br>
+    1427 <input type="radio" name="Q13" value="1427"> <br> 
+    1430 <input type="radio" name="Q13" value="1430"> <br> 
+    1431 <input type="radio" name="Q13" value="1431"> <br> <!-- correct -->
+    1434 <input type="radio" name="Q13" value="1434"> <br>
+    
+    <hr>
+    
+Q14: Which English city was once known as Duroliponte? <br>
+    Manchester <input type="radio" name="Q14" value="Manchester"> <br> 
+    Cambridge <input type="radio" name="Q14" value="Cambridge"> <br> <!-- correct -->
+    Birmingham <input type="radio" name="Q14" value="Birmingham"> <br>
+    London <input type="radio" name="Q14" value="London"> <br>
+    
+    <hr>
+    
+Q15: The first successful vaccine was introduced by Edward Jenner in 1796. Which disease did it guard against? <br>
+    Cholera <input type="radio" name="Q15" value="Cholera"> <br> 
+    Smallpox <input type="radio" name="Q15" value="Smallpox"> <br> <!-- correct -->
+    Typhus <input type="radio" name="Q15" value="Typhus"> <br>
+    Flu <input type="radio" name="Q15" value="Flu"> <br>
+    
+    <hr>
+    
+   <h6><strong> -----Sports-----  </strong></h6>
+
+    <hr>
+    
+Q16: What are the five colours of the Olympic rings (in order)? <br>
+    Blue, yellow, black, green and red  <input type="radio" name="Q16" value="BYBGR"> <br> <!-- correct -->
+    Blue, red, green, yellow, black <input type="radio" name="Q16" value="BRGYB"> <br> 
+    Red, green, black, blue, yellow <input type="radio" name="Q16" value="RGBBY"> <br>
+    Red, black, green, blue, yellow <input type="radio" name="Q16" value="RBGBY"> <br>
+    
+    <hr>
+    
+Q17: How many players are there in a rugby league team? <br>
+    12 <input type="radio" name="Q17" value="12"> <br> 
+    13 <input type="radio" name="Q17" value="13"> <br> <!-- correct -->
+    14 <input type="radio" name="Q17" value="14"> <br>
+    15 <input type="radio" name="Q17" value="15"> <br>
+    
+    <hr>
+    
+Q18: Which horse is the only three-time winner of the Grand National? <br>
+    Foinavon <input type="radio" name="Q18" value="Foinavon"> <br> 
+    Mr Frisk <input type="radio" name="Q18" value="Mr Frisk"> <br> 
+    Red Rum <input type="radio" name="Q18" value="Red Rum"> <br> <!-- correct -->
+    Aldaniti <input type="radio" name="Q18" value="Aldaniti"> <br>
+    
+    <hr>
+    
+Q19: In tennis, what piece of fruit is found at the top of the men's Wimbledon trophy? <br>
+    Dragonfruit <input type="radio" name="Q19" value="Dragonfruit"> <br> 
+    Passionfruit <input type="radio" name="Q19" value="Passionfruit"> <br> 
+    Pear <input type="radio" name="Q19" value="Pear"> <br>
+    Pineapple <input type="radio" name="Q19" value="Pineapple"> <br> <!-- correct -->
+    
+    <hr>
+    
+Q20: How many world titles has Phil Talyor won in darts? <br>
+    16 <input type="radio" name="Q20" value="16"> <br> <!-- correct -->
+    17 <input type="radio" name="Q20" value="17"> <br> 
+    18 <input type="radio" name="Q20" value="18"> <br>
+    19 <input type="radio" name="Q20" value="19"> <br>
+    
+    <hr>
+    
+  <h6>strong>  -----Food and Drink-----  </strong></h6>
+    
+    <hr>
+    
+Q21: Which nuts are used in marzipan? <br>
+    Almonds <input type="radio" name="Q21" value="Almonds"> <br> <!-- correct -->
+    Peanuts <input type="radio" name="Q21" value="Peanuts"> <br> 
+    Cashews <input type="radio" name="Q21" value="Cashews"> <br>
+    Walnuts <input type="radio" name="Q21" value="Walnuts"> <br>
+
+    <hr>
+
+Q22: What is the most famous Mexican beer? <br>
+    Budweiser <input type="radio" name="Q22" value="Budweiser"> <br> 
+    Heineken <input type="radio" name="Q22" value="Heineken"> <br> 
+    Corona (hehehe) <input type="radio" name="Q22" value="Corona"> <br> <!-- correct -->
+    Stella Artois <input type="radio" name="Q22" value="Stella Artois"> <br>
+
+    <hr>
+
+Q23: Which country is the origin of the cocktail Mojito? <br>
+    Mexico <input type="radio" name="Q23" value="Mexico"> <br>
+    Cuba <input type="radio" name="Q23" value="Cuba"> <br> <!-- correct -->
+    Italy <input type="radio" name="Q23" value="Italy"> <br>
+    Spain <input type="radio" name="Q23" value="Spain"> <br>
+
+    <hr>
+
+Q24: Which vitamin is the only one that you will not find in an egg? <br>
+    Vitamin A <input type="radio" name="Q24" value="Vitamin A"> <br> 
+    Vitamin B <input type="radio" name="Q24" value="Vitamin B"> <br> 
+    Vitamin C <input type="radio" name="Q24" value="Vitamin C"> <br> <!-- correct -->
+    Vitamin D <input type="radio" name="Q24" value="Vitamin D"> <br>
+
+    <hr>
+
+Q25: Which fish is the main ingredient of Scotch Woodcock?  <br>
+    Anchovy <input type="radio" name="Q25" value="Anchovy"> <br> <!-- correct -->
+    Striped Bass <input type="radio" name="Q25" value="Striped Bass"> <br> 
+    Salmon <input type="radio" name="Q25" value="Salmon"> <br>
+    Flounder <input type="radio" name="Q25" value="Flounder"> <br>
+    <hr>
+    
+    
+    
+  <!--
+    Who provides the voice of Pikachu in the 2019 "Pokémon: Detective Pikachu" movie? <br>
+    Ryan Reynolds <input type="radio" name="Actors" value="Reynolds"> <br>
+    no <input type="radio" name="over 18" value="no" <br> <br>
+    don't want to say <input type="radio" name="over 18" value="maybe"<br>  
+           -->
+<!-- https://www.express.co.uk/life-style/life/1278265/100-general-knowledge-quiz-questions-and-answers       
+
+
+
+-----Geography-----
+1) What is the capital of Chile?
+  a)
+  b)Santiago (correct)
+  c)
+  d)
+
+2) What is the highest mountain in Britain?
+  a)
+  b)
+  c)Ben Nevis (correct)
+  d)
+
+3) What is the smallest country in the world?
+  a)Monaco
+  b)Nauru
+  c)Israel
+  d)Vatican City (correct)
+
+4) Alberta is a province of which country?
+  a)Canada (correct)
+  b)USA
+  c)Mexico
+  d)Greenland
+
+5) How many countries still have the shilling as currency?
+  a)Three - Kenya, Ethiopia, Uganda
+  b)Four – Kenya, Uganda, Tanzania and Somalia (correct)
+  c)Five - Kenya, Ethiopia, Tanzania, Uganda, Somalia
+  d)Six - Kenya, Madagascar, Ethiopia, Uganda, Somalia, Tanzania
+
+6) Which is the only vowel not used as the first letter in a US State?
+  a)E (correct)
+  b)O
+  c)U
+  d)I
+
+7) What is the largest country in the world?
+  a)USA
+  b)China
+  c)India
+  d)Russia (correct)
+
+8) Where would you find the River Thames?
+  a)Rome, Italy
+  b)Paris, France
+  c)London, UK (correct)
+  d)Madrid, Spain
+
+9) What is the hottest continent on Earth?
+  a)Africa (correct)
+  b)South America
+  c)Asia
+  d)Europe
+
+10) What is the longest river in the world?
+  a)River Nile (correct)
+  b)Congo River
+  c)Yellow River
+  d)Lena River
+    
+-----History-----
+11) What did the Romans call Scotland?
+  a)Caledonia (correct)
+  b)Scots
+  c)Scottish Lowlands
+  d)Scottish Highlands
+
+12) Who was made Lord Mayor of London In 1397, 1398, 1406 And 1419?
+  a)Thomas Knolles
+  b)Richard Whittington (correct)
+  c)William Martin
+  d)William Cauntbrigge
+
+13) In which year was Joan of Arc burned at the stake?
+  a)1427
+  b)1430
+  c)1431 (correct)
+  d)1434
+
+14) Which English city was once known as Duroliponte?
+  a)Manchester
+  b)Cambridge (correct)
+  c)Birmingham
+  d)London
+
+15) The first successful vaccine was introduced by Edward Jenner in 1796. Which disease did it guard against?
+  a)Cholera
+  b)Smallpox (correct)
+  c)Typhus
+  d)Flu
+
+-----Sports-----  
+16) What are the five colours of the Olympic rings (in order)?
+  a)Blue, yellow, black, green and red (correct)
+  b)Blue, red, green, yellow, black
+  c)Red, green, black, blue, yellow
+  d)Red, black, green, blue, yellow
+
+17) How many players are there in a rugby league team?
+  a)12
+  b)13 (correct)
+  c)14
+  d)15
+
+18) Which horse is the only three-time winner of the Grand National?
+  a)Foinavon
+  b)Mr Frisk
+  c)Red Rum (correct)
+  d)Aldaniti
+
+19) In tennis, what piece of fruit is found at the top of the men's Wimbledon trophy?
+  a)Dragonfruit
+  b)Passionfruit
+  c)Pear
+  d)Pineapple (correct)
+
+20) How many world titles has Phil Talyor won in darts?
+  a)16 (correct)
+  b)17
+  c)18
+  d)19
+
+-----Food and Drink-----
+21) Which nuts are used in marzipan?
+  a)Almonds (correct)
+  b)Peanuts
+  c)Cashews
+  d)Walnuts
+
+22) What is the most famous Mexican beer?
+  a)Budweiser
+  b)Heineken
+  c)Corona (lol) (correct)
+  d)Stella Artois
+
+23) Which country is the origin of the cocktail Mojito?
+  a)Mexico
+  b)Cuba (correct)
+  c)Italy
+  d)Spain
+
+24) Which vitamin is the only one that you will not find in an egg?
+  a)Vitamin A
+  b)Vitamin B
+  c)Vitamin C (correct)
+  d)Vitamin D 
+
+25) Which fish is the main ingredient of Scotch Woodcock? 
+  a)Anchovy (correct)
+  b)Striped Bass
+  c)Salmon
+  d)Flounder
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   --> 
+    <input type = "submit" value = "Submit">
+  </form>
+  
+  <% } else { %>
+  <div class="row">
+    <div class="col">
+      <h4>
+        Please <a href="/login">Login or Signup</a> to take the quiz. 
+      </h4>
+    </div>
+    <div class="col">
+      <h4 style="text-align:right;">
+        <a href="/quiz-results">Leaderboards</a>
+      </h4>
+    </div>
+  </div>
+  <% } %>
+  
+</body>
+
+<hr>
+  
+<%- include('link-to-survey') -%>
+<%- include('bootfooter') -%>
