@@ -8,34 +8,54 @@
     <h3>
       <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item ">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="/find-the-number">Find The Number</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/mafia">Mafia</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="/forum">Forum</a>
-      </li>
-      
-      <% if (!loggedIn) {%>
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Login/Signup</a>
-      </li>
-      <% } else { %>
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout <%= username %></a>
-      </li>
-      <% } %>
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/games" role="button" aria-haspopup="true" aria-expanded="false">Games</a>
+          <div class="dropdown-menu">
+            
+            <a class="dropdown-item" href="/games">Game List</a>
+            
+            <div class="dropdown-divider"></div>
+            
+            <a class="dropdown-item" href="/find-the-number">Find The Number</a>
+            
+            <a class="dropdown-item" href="/mafia">Mafia</a>
+            
+            <a class="dropdown-item" href="/quiz">Quiz</a>
+            
+          </div>
+        </li>
+        
+        <!--
+        <li class="nav-item">
+          <a class="nav-link" href="/find-the-number">Find The Number</a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="/mafia">Mafia</a>
+        </li>
+        -->
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/forum">Forum</a>
+        </li>
+      
+        <% if (!loggedIn) {%>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login/Signup</a>
+        </li>
+    
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout <%= username %></a>
+        </li>
+        <% } %>
       
       
-    </ul>
+      </ul>
     </h3>
   </div>
 </nav>

@@ -6,7 +6,10 @@ const Schema = mongoose.Schema;
 
 var userSchema = Schema( {
   username: String,
-  passphrase: String
+  passphrase: String,
+  email: String
 } );
 
 module.exports = mongoose.model( 'UserTeam2', userSchema );
+
+/* we should add in that they need an email to sign up */ 

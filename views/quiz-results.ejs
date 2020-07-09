@@ -1,0 +1,44 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<body>
+  <h1>
+    Quiz Leaderboard: 
+  </h1>
+  
+  <p id="data">
+    
+  </p>
+  
+  <p>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Number of Questions Correct</th>
+        <th>Total Number of Questions</th>
+        <th>Percent Correct</th>
+        <th>Date</th>
+      </thead>
+      <tbody>
+        <% var count = 1 %>
+        <% quizzes.forEach(x => { %>
+        
+        <tr>
+          <td> <%= count++ %> </td>
+          <td> <%= x.username %> </td>
+          <td> <%= x.numCorrect %> </td>
+          <td> <%= x.totalQ %> </td>
+          <td> <%= x.percent * 100 %>% </td>
+          <td> <%= x.date %> </td>
+        </tr>
+      
+      <% }) %>
+      </tbody>
+    </table>
+  </p>
+  
+</body>
+
+<%- include('link-to-survey') -%>
+<%- include('bootfooter') -%>

@@ -73,6 +73,10 @@ app.get("/", (req, res, next) => {
   res.render("index", { title: "Xolbor Games" });
 });
 
+app.get("/games", (req, res, next) => {
+  res.render("games")
+})
+
 app.get("/find-the-number", (req, res) => {
   res.render("find-the-number");
 });
@@ -80,6 +84,10 @@ app.get("/find-the-number", (req, res) => {
 app.get("/mafia", (req, res) => {
   res.render("mafia");
 });
+
+app.get("/quiz", (req, res) => {
+  res.render("quiz");
+})
 
 app.get("/post-game-survey", (req, res) => {
   res.render("post-game-survey");
@@ -91,8 +99,8 @@ app.post("/saveformdata", async (req, res, next) => {
   try {
     req.body.date = new Date()
     req.body.username = res.locals.username || "Guest";
-    const {username, game, rating, wouldRecommend, improvement, comments, date} = req.body;
-    const survey = new SurveyData(username, game, rating, wouldRecommend, improvement, comments, date);
+    const {game, rating, wouldRecommend, improvement, comments, date, username} = req.body;
+    const survey = new SurveyData({username, game, rating, wouldRecommend, improvement, comments, date});
     await survey.save();
     res.redirect("/");
   } catch (e) {
@@ -132,6 +140,41 @@ app.post("/addToForum", async (req, res, next) => {
     next(e);
   }
 });
+
+const QuizSubmission = require('./models/QuizSubmission')
+
+app.get("/quiz-results", async (req, res, next) => {
+  try {
+    res.locals.quizzes = await QuizSubmission.find().sort({percent:-1}).limit(100)
+    res.render("quiz-results");
+  } catch (e) {
+    next(e);
+  }
+})
+
+app.post("/submitQuiz", async (req, res, next) => {
+  try {
+    const key = require('./models/createQuizKey')
+    var length = Object.keys(key).length;
+    var numWrong = 0;    
+    for (var x in key) {
+      if (req.body[x] != key[x]) {
+        numWrong++;
+      }
+    }
+    const numCorrect = length - numWrong;
+    const totalQ = length;
+    const percent = (numCorrect / totalQ);
+    const date = new Date();
+    const username = res.locals.username || "Guest";
+    
+    const quiz = new QuizSubmission({username, numCorrect, totalQ, percent, date});
+    await quiz.save();
+    res.redirect("/quiz-results");
+  } catch (e) {
+    next(e);
+  }
+})
 
 app.get('/startGame', (req, res) => {
   res.render("startGame")
