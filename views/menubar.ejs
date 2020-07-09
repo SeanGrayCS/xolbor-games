@@ -1,11 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/"><strong>Xolbor</strong></a>
+  <a class="navbar-brand" href="/"><img src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FXOLBORLOGOLIGHT.png?v=1594238117359" width="50%" alt="Logo" style="Filter= FlipH."></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <h3>
+      <ul class="navbar-nav mr-auto">
 
       <li class="nav-item ">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -16,7 +17,11 @@
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" href="/game-2">Game 2</a>
+        <a class="nav-link" href="/mafia">Mafia</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/forum">Forum</a>
       </li>
       
       <% if (!loggedIn) {%>
@@ -26,11 +31,11 @@
       <% } else { %>
         <li class="nav-item">
           <a class="nav-link" href="/logout">Logout <%= username %></a>
-        </li>
+      </li>
       <% } %>
       
       
     </ul>
-    
+    </h3>
   </div>
 </nav>

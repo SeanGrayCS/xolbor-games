@@ -3,11 +3,13 @@ const mongoose = require( 'mongoose' );
 const Schema = mongoose.Schema;
 
 var dataSchema = Schema( {
+  username: String,
   game: String,
   rating: String,
   wouldRecommend: String,
   improvement: String,
-  additionalComments: String
+  additionalComments: String,
+  date: Date
 } );
 
-var SurveyData = mongoose.model("SurveyData", dataSchema);
+module.exports = mongoose.model("SurveyDataTeam2", dataSchema);

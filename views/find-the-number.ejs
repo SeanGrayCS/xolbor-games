@@ -10,8 +10,6 @@
     <br>
     <br>
     Keep guessing until you get it right! 
-    <br>
-    <br>
   </h3>
   <br>
 
@@ -51,8 +49,19 @@
         numGuesses++;
         document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
         document.getElementById("yourGuess").innerHTML = "You Guessed: " + numberGuess;
+        
         if (numberGuess == numberGen) {
           document.getElementById("isCorrect").innerHTML = "The Number Was: " + numberGen + ". You Guessed The Number in " + numGuesses + " Guesses!";
+          /*
+          $.ajax({
+            type: "POST",
+            url: "/logToLeader",
+            data: numGuesses,
+            success: function {
+              console.log("success")
+            }
+          });
+          */
         }
     
         if (numberGuess > numberGen) {
@@ -66,9 +75,9 @@
     }
     
     function resetGame() {
-      var numberGen = (Math.floor(Math.random() * 1000)) + 1;
-      var numberGuess = 0;
-      var numGuesses = 0;
+      numberGen = (Math.floor(Math.random() * 1000)) + 1;
+      numberGuess = 0;
+      numGuesses = 0;
       document.getElementById("isCorrect").innerHTML = "Game Has Been Reset";
       document.getElementById("yourGuess").innerHTML = "Guess A Number";
       document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
@@ -79,14 +88,16 @@
 </body>
 </div>
 
-<hr>
-
-<audio controls autoplay>
+<audio controls autoplay id="rickroll" style="visibility: hidden;">
   <source src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FRick_Astley_-_Never_Gonna_Give_You_Up_Qoret.com.mp3?v=1594132592488" type="audio/mpeg">
   Your Crappy, Outdated Browser Saved You From a Rickroll. Congrats. <!-- rip me :( -->
 </audio>
 
-<hr>
+<script>
+  var audio = document.getElementById("rickroll");
+  audio.volume = 0.3;
+</script>
+
 
 <%- include('link-to-survey') -%>
 <%- include('bootfooter') -%>

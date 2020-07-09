@@ -1,0 +1,53 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<div class="jumbotron">
+  <h1>
+    Forum
+  </h1>
+  <br>
+  <h3>
+    Discuss With Others About Xolbor
+  </h3>
+</div>
+
+<form method="post" action="/addToForum">
+  Topic: 
+  <select name="topic">
+    <option>Overall Website</option>
+    <option>Guess The Number</option>
+    <option>Mafia</option>
+  </select>
+  <br>
+  Your message: 
+  <br>
+  <textarea name="message" rows="10" cols"194"></textarea>
+  <br>
+  <input type="submit">
+</form>
+<br>
+<hr>
+
+<h3>
+  Forum Posts:
+</h3>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>User</th><th>Topic</th><th>Message</th><th>Date & Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% posts.forEach(x => { %>  
+    <tr>
+      <td><%= x.username %></td> 
+      <td><%= x.topic %></td>
+      <td><%= x.message %></td>  
+      <td><%= x.date %></td> 
+    </tr> 
+    <% }) %>
+  </tbody>
+</table>
+<hr>
+
+<%- include('bootfooter') -%>

@@ -2,14 +2,9 @@
 <%- include('menubar') -%>
 
 <div class="jumbotron">
-  <h1>Xolbor Games</h1>
-  <p>~Not Roblox~</p>
-
-<img src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FXOLBORLOGO.JPG?v=1594216142326" width="33%" alt="Logo" style="Filter= FlipH.">
-<!--
-  I can change the background color later. - Sean G
--->
-  
+  <h2>
+    Play our games. We aren't roblox. We know where you live.
+  </h2>
 </div>
 <hr>
 
@@ -17,44 +12,44 @@
  <strong>All Games:</strong> 
 </h5>
 
-
-
-
-<!--   this is the old code:
-<img src="https://www.learningaboutelectronics.com/images/Guess-a-number-from-1-to-10.png" width="200" alt="Photo of find-the-number">
-
-<ul>
-  <li class="nav-item">
-    <a class="nav-link" href="/find-the-number">Find The Number</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/game-2">Game 2</a>
-  </li>
-</ul>
--->
-
 <div class="row">
   <div class="col">
-    <a class="nav-link" href="/find-the-number">
-      <img src="https://www.learningaboutelectronics.com/images/Guess-a-number-from-1-to-10.png" width="33%" alt="Photo of find-the-number">
-      <br>
-      <p class="tab">
-        Find the Number
-      </p>
-    </a>
+    <section class="parent">
+      <div class="child">
+        <a class="nav-link" href="/find-the-number" id="game1">
+        </a>
+      </div>
+    </section>
   </div>
   <div class="col">
-    <a class="nav-link" href="/game-2">
-      <img src="https://cdn.vox-cdn.com/thumbor/DhSpDCsBeTS0fTEbv8OfqYBSvrg=/0x0:2040x1360/1200x800/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/63612751/acastro_190208_3223_game_streaming.0.jpg"
-         width="33%" alt="Photo of second game">
-      <br>
-      <p class="tab">
-        Game 2
-      </p>
-    </a>
+    <section class="parent">
+      <div class="child">
+        <a class="nav-link" href="/mafia" id="game2">
+        </a>
+      </div>
+    </section>
   </div>
 </div>
 
+<script>
+  window.onload = function() {
+      if (window.deviceType == 0) {
+        //Browser
+        document.getElementById("game1").innerHTML = '<img src="https://www.learningaboutelectronics.com/images/Guess-a-number-from-1-to-10.png" height="275px" alt="Photo of find-the-number"><br><h4>Find the Number</h4>';
+        document.getElementById("game2").innerHTML = '<img src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FMafia.PNG?v=1594239307001" height="275px" alt="Photo of Mafia"><br><h4>Mafia</h4>';
+      }
+      if (window.deviceType == 1) {
+        //Phone
+        document.getElementById("game1").innerHTML = '<img src="https://www.learningaboutelectronics.com/images/Guess-a-number-from-1-to-10.png" height="175px" alt="Photo of find-the-number"><br><h4>Find the Number</h4>';
+        document.getElementById("game2").innerHTML = '<img src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FMafia.PNG?v=1594239307001" height="175px" alt="Photo of Mafia"><br><h4>Mafia</h4>';
+      }
+      if (window.deviceType == 2) {
+        //Tablet
+        document.getElementById("game1").innerHTML = '<img src="https://www.learningaboutelectronics.com/images/Guess-a-number-from-1-to-10.png" height="275px" alt="Photo of find-the-number"><br><h4>Find the Number</h4>';
+        document.getElementById("game2").innerHTML = '<img src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FMafia.PNG?v=1594239307001" height="275px" alt="Photo of Mafia"><br><h4>Mafia</h4>';
+      }
+    }
+</script>
 
 <hr>
 

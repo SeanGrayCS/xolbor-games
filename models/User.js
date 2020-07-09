@@ -9,4 +9,4 @@ var userSchema = Schema( {
   passphrase: String
 } );
 
-module.exports = mongoose.model( 'User', userSchema );
+module.exports = mongoose.model( 'UserTeam2', userSchema );

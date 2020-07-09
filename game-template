@@ -21,4 +21,7 @@
   -->  
 </body>
 
+<hr>
+
+<%- include('link-to-survey') -%>
 <%- include('bootfooter') -%>

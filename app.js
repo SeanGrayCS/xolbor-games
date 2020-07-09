@@ -68,26 +68,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
-
-app.get('/forum', (req,res) => {
-  res.render('forum')
-})
-
-let forumPosts = []
-
-app.post("/addToForum", (req,res) => {
-  req.body.date = new Date()
-  req.body.username = res.locals.username
-  forumPosts = forumPosts.concat(req.body)
-  res.locals.posts = forumPosts
-  res.render("forum")
-  //res.json(forumPosts)
-})
-
-
-
-
 // here we start handling routes
 app.get("/", (req, res, next) => {
   res.render("index", { title: "Xolbor Games" });
@@ -97,30 +77,102 @@ app.get("/find-the-number", (req, res) => {
   res.render("find-the-number");
 });
 
-app.get("/game-2", (req, res) => {
-  res.render("game-2");
+app.get("/mafia", (req, res) => {
+  res.render("mafia");
 });
 
 app.get("/post-game-survey", (req, res) => {
   res.render("post-game-survey");
 });
 
-let surveyData = [];
+const SurveyData = require('./models/SurveyData');
 
-app.post("/saveformdata", (req, res) => {
+app.post("/saveformdata", async (req, res, next) => {
+  try {
+    req.body.date = new Date()
+    req.body.username = res.locals.username || "Guest";
+    const {username, game, rating, wouldRecommend, improvement, comments, date} = req.body;
+    const survey = new SurveyData(username, game, rating, wouldRecommend, improvement, comments, date);
+    await survey.save();
+    res.redirect("/");
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.get("/showformdata", async (req, res, next) => {
+  try {
+    res.locals.surveys = await SurveyData.find().sort({date:-1})
+    res.render("showformdata");
+  } catch (e) {
+    next(e);
+  }    
+})
+
+const ForumPost = require('./models/ForumPost')
+
+app.get('/forum', async (req, res, next) => {
+  try {
+    res.locals.posts = await ForumPost.find().sort({date:-1})
+    res.render("forum");
+  } catch (e) {
+    next(e);
+  }
+})
+
+app.post("/addToForum", async (req, res, next) => {
+  try {
+    req.body.date = new Date();
+    req.body.username = res.locals.username || "Guest"
+    const {topic, message, date, username} = req.body;
+    const forumPost = new ForumPost({username, topic, message, date});
+    await forumPost.save();
+    res.redirect("/forum")
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.get('/startGame', (req, res) => {
+  res.render("startGame")
+})
+
+let games = []
+app.post('/createGame', (req, res) => {
+  const gameInfo = req.body
+  games = games.concat(gameInfo)
+  res.locals.games = games
+  res.render('showGames')
+})
+
+const User = require('./models/User')
+
+app.get('/showUsers',
+       async (req ,res, next) => {
+  try{
+    const users = await User.find()
+    res.json(users)
+  } catch(error){
+    next(error)
+  }
+})
+
+
+/*
+let findNumberLeader = [];
+
+app.post('/logToLeader', (req, res) => {
   req.body.date = new Date()
   req.body.username = res.locals.username
   if (req.body.username === null) {
     req.body.username = "Guest";
   }
-  surveyData = surveyData.concat(req.body);
-  res.render("index");
+  findNumberLeader = findNumberLeader.concat(req.body)
+  res.locals.leaders = findNumberLeader
+  res.redirect('/find-the-number')
 });
+*/
 
-app.get("/showformdata", (req, res) => {
-  res.locals.surveys = surveyData;
-  res.render("showformdata");
-})
 
 // Don't change anything below here ...
 
