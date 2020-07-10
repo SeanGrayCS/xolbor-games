@@ -1,5 +1,5 @@
 <%- include('bootheader') -%>
-<%- include('menubar') -%>
+<%- include('menubar') -%> 
 
 <div class="jumbotron">
   <h1>
@@ -17,6 +17,7 @@
     <option>Overall Website</option>
     <option>Guess The Number</option>
     <option>Mafia</option>
+    <option>Quiz</option>
   </select>
   <br>
   Your message: 
@@ -35,15 +36,26 @@
   <thead>
     <tr>
       <th>User</th><th>Topic</th><th>Message</th><th>Date & Time</th>
+      <% if(isAdmin) { %>
+      <th>Removal</th>
+      <% } %>
     </tr>
   </thead>
   <tbody>
-    <% posts.forEach(x => { %>  
+    <% posts.forEach(post => { %>  
     <tr>
-      <td><%= x.username %></td> 
-      <td><%= x.topic %></td>
-      <td><%= x.message %></td>  
-      <td><%= x.date %></td> 
+      <td><%= post.username %></td> 
+      <td><%= post.topic %></td>
+      <td><%= post.message %></td>  
+      <td><%= post.date %></td>
+      <% if(isAdmin) { %>
+      <td>
+        <form method="post" action="/removePost">
+          <input type="hidden" name="id" value="<%= post._id %>">
+          <input type="submit" value="Remove Post">
+        </form>
+      </td>
+      <% } %>
     </tr> 
     <% }) %>
   </tbody>

@@ -1,0 +1,45 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<% if (loggedIn && isAdmin) { %>
+
+<div class="jumbotron">
+  <h1>
+    Admin Page
+  </h1>
+  <br>
+</div>
+<hr>
+<body>
+  <form method="post" action="/makeAdmin">
+    ID of user to be made admin:
+    <input type="text" name="id">
+    <input type="submit" value="Make User Admin">
+  </form>
+  <br>
+  <hr>
+  <br>
+  <form method="post" action="/removeAdmin">
+    ID of user to be removed as admin:
+    <input type="text" name="id">
+    <input type="submit" value="Remove User's Admin">
+  </form>
+  <br>
+  <hr>
+  <br>
+  <form method="post" action="/removeUser">
+    DANGEROUS: ID of user to be removed from database:
+    <input type="text" name="id">
+    <input type="submit" value="REMOVE USER FROM SITE">
+  </form>
+</body>
+
+<hr>
+
+<% } else { %>
+
+<a href="/">You must be an admin to use this page.</a>
+
+<% } %>
+
+<%- include('bootfooter') -%>

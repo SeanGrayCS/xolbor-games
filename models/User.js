@@ -7,7 +7,8 @@ const Schema = mongoose.Schema;
 var userSchema = Schema( {
   username: String,
   passphrase: String,
-  email: String
+  email: String,
+  admin: Boolean
 } );
 
 module.exports = mongoose.model( 'UserTeam2', userSchema );

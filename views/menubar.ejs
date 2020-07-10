@@ -28,32 +28,65 @@
             
           </div>
         </li>
-        
-        <!--
-        <li class="nav-item">
-          <a class="nav-link" href="/find-the-number">Find The Number</a>
-        </li>
-      
-        <li class="nav-item">
-          <a class="nav-link" href="/mafia">Mafia</a>
-        </li>
-        -->
-        
+    
         <li class="nav-item">
           <a class="nav-link" href="/forum">Forum</a>
         </li>
-      
-        <% if (!loggedIn) {%>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login/Signup</a>
-        </li>
-    
-        <% } else { %>
+
+        
+        
+        
+        <% if (loggedIn && isAdmin) { %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/games" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/admin">Admin</a>
+            
+          <div class="dropdown-divider"></div>
+            
+              <a class="dropdown-item" href="/showUsers">Show Users</a>
+              
+              <a class="dropdown-item" href="/showformdata">Survey Data</a>
+           </div>
+         </li>
+        
+        
+        <!-- Old code for admin
           <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout <%= username %></a>
-        </li>
+            <a class="nav-link" href="/admin">Admin</a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/showUsers">Show Users</a>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/showformdata">Survey Data</a>
+          </li>
+        -->
+    
         <% } %>
       
+        <% if (!loggedIn) {%>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login/Signup</a>
+          </li>
+    
+        
+        
+        <% } else { %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/profile" role="button" aria-haspopup="true" aria-expanded="false"> <%= username %> </a> 
+          <div class="dropdown-menu">
+            
+            <a class="dropdown-item" href="/profile">Profile</a>
+         
+            <a class="dropdown-item" href="/logout">Logout</a>
+          </div>
+        </li>
+        </li> <!-- I see that this </li> is here, but I don't see a <li> that starts it. Am I just missing something? or can we just delete it? -->
+        <% } %>
       
       </ul>
     </h3>

@@ -1,18 +1,12 @@
-<!--
-  For viewing survey data: https://xolbor-games.glitch.me/showformdata
--->
-
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
+
+<% if (loggedIn && isAdmin) { %>
 
 <body>
   <h1>
     Survey Data: 
   </h1>
-  
-  <p id="data">
-    
-  </p>
   
   <p>
     <table class="table table-bordered table-striped">
@@ -26,23 +20,29 @@
         <th>Comments</th>
       </thead>
       <tbody>
-      <% surveys.forEach(x => { %>
+        <% surveys.forEach(survey => { %>
         
         <tr>
-          <td> <%= x.username %> </td>
-          <td> <%= x.date %> </td>
-          <td> <%= x.game %> </td>
-          <td> <%= x.rating %> </td>
-          <td> <%= x.wouldRecommend %> </td>
-          <td> <%= x.improvement %> </td>
-          <td> <%= x.additionalComments %> </td>
+          <td> <%= survey.username %> </td>
+          <td> <%= survey.date %> </td>
+          <td> <%= survey.game %> </td>
+          <td> <%= survey.rating %> </td>
+          <td> <%= survey.wouldRecommend %> </td>
+          <td> <%= survey.improvement %> </td>
+          <td> <%= survey.additionalComments %> </td>
         </tr>
       
-      <% }) %>
+        <% }) %>
       </tbody>
     </table>
   </p>
   
 </body>
+
+<% } else { %>
+
+<a href="/">You must be an admin to use this page.</a>
+
+<% } %>
 
 <%- include('bootfooter') -%>

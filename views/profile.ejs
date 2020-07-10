@@ -1,0 +1,95 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<% if(user === null) { %>
+<!-- /profile page -->
+<div class="jumbotron row">
+  <div class="col">
+    <h1>
+     Your Profile
+    </h1>
+    <br>
+    <p>
+      This is where you can change your settings and see your rankings in the games.
+    </p>
+  </div>
+  <div class="col">
+    <h3>
+      Date/Time: <span id="datetime"></span>
+      <script>
+          var dt = new Date();
+          document.getElementById("datetime").innerHTML = dt.toLocaleTimeString(+1);
+      </script>
+    </h3>
+  </div>
+</div>
+
+<h2>
+  Your Information:
+</h2>
+<h5>
+Username: <%= username %> <br>
+Email: <%= email %> <br>
+Phone Number:  <br>
+Address:  <br>
+  
+<!-- I want to make it so that if there is no email when they made an account, that they can put in their email, But I can't figure it out. Someone help?
+
+<@% if <@%= email %> === null { %>
+
+<form method="post" action="/signup">
+
+  Email: <input type="email" autocomplete="email" name="email"<br><br>
+
+  Phone Number: <input type="tel" autpcomplete ="tel" name="Phone Number"><br>
+
+  Address: <input type="text" autocomplete = "address" name="Address"><br>
+
+  <input type="submit">
+</form>
+<@% } %>
+-->
+  
+Profile Picture: <!-- You guys wanna add profile pictures? if we do, then make 2 collumns and profile picture on right column -->
+
+  
+</h5>
+
+<hr>
+
+<h2>
+  Your Rankings (in games that have rankings):
+</h2>
+
+<select name="gamenames">
+  <option>Quiz</option>
+</select>
+Rank: <!-- I can't figure out how to get their rankings for the Quiz game. I am trying to use <.%= count++ %> just like in the leaderboards, but it is not working? -->
+
+<% } else { %>
+<!-- /profile/userId page -->
+
+
+
+
+
+
+<div class="jumbotron">
+  <h1>
+    User Profile
+  </h1>
+  <br>
+</div>
+
+<body>
+  Username: 
+  <%= user.username %>
+  <br>
+</body>
+
+<hr>
+
+<% } %>
+
+<%- include('link-to-survey') -%>
+<%- include('bootfooter') -%>
