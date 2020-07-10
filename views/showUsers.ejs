@@ -1,0 +1,32 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<% if (loggedIn && isAdmin) { %>
+<br>
+<hr>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>User ID</th><th>Username</th><th>Email</th><th>Is An Admin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(user => { %>  
+    <tr>
+      <td><%= user._id %></td> 
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>  
+      <td><%= user.admin %></td>
+    </tr> 
+    <% }) %>
+  </tbody>
+</table>
+<hr>
+
+<% } else { %>
+
+<a href="/">You must be an admin to use this page.</a>
+
+<% } %>
+
+<%- include('bootfooter') -%>

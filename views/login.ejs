@@ -35,9 +35,11 @@ Password
             </form>
         </div>
         <div class="col-sm-2" style="text-align:center">
-            OR
         </div>
         <div class="col-sm-5">
+          <h5>
+            <%= message %>
+          </h5>
             <h2>Signup</h2>
             <form method="post" action="/signup">
                 Username: <input type="text" autocomplete="username" name="username"><br>
@@ -45,7 +47,7 @@ Password
                    <input type="password" autocomplete="passphrase" name="passphrase"><br>
                 Confirm passphrase:
                     <input type="password" name="passphrase2"><br>
-                Email: <input type="email" autocomplete="email" name="email"<br>
+                Email: <input type="email" autocomplete="email" name="email"<br><br>
                 <input type="submit">
             </form>
         </div>

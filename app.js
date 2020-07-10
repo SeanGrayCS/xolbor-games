@@ -69,7 +69,7 @@ app.use(function(req, res, next) {
 });
 
 // here we start handling routes
-app.get("/", (req, res, next) => {
+app.get("/", (req, res, next) => {  
   res.render("index", { title: "Xolbor Games" });
 });
 
@@ -139,7 +139,16 @@ app.post("/addToForum", async (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
+})
+
+app.post('/removePost', async (req, res, next) => {
+  try {
+    await ForumPost.remove({_id:req.body.id})
+    res.redirect('/forum')
+  } catch(e) {
+    next(e)
+  }
+})
 
 const QuizSubmission = require('./models/QuizSubmission')
 
@@ -193,13 +202,60 @@ const User = require('./models/User')
 app.get('/showUsers',
        async (req ,res, next) => {
   try{
-    const users = await User.find()
-    res.json(users)
+    res.locals.users = await User.find()
+    res.render('showUsers')
   } catch(error){
     next(error)
   }
 })
 
+app.get('/profile', (req, res) => {
+  res.locals.userId = null
+  res.locals.user = null
+  res.render('profile')
+})
+
+app.get('/profile/:username', async (req, res, next) => {
+  try {
+    const username = req.params.username
+    res.locals.name = username
+    res.locals.user = await User.findOne({username:username})
+    res.render('profile')
+  } catch(e) {
+    next(e)
+  }
+})
+
+app.get('/admin', (req, res) => {
+  res.render('admin')
+})
+
+app.post('/makeAdmin', async (req, res, next) => {
+  try {
+    await User.update({_id:req.body.id}, {$set:{admin:true}})
+    res.redirect('/admin')
+  } catch(e) {
+    next(e)
+  }
+})
+
+app.post('/removeAdmin', async (req, res, next) => {
+  try {
+    await User.update({_id:req.body.id}, {$set:{admin:false}})
+    res.redirect('/admin')
+  } catch(e) {
+    next(e)
+  }
+})
+
+app.post('/removeUser', async (req, res, next) => {
+  try {
+    await User.remove({_id:req.body.id})
+    res.redirect('/admin')
+  } catch(e) {
+    next(e)
+  }
+})
 
 /*
 let findNumberLeader = [];
