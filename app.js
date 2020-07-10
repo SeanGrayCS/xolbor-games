@@ -11,8 +11,6 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const debug = require("debug")("personalapp:server");
 
-
-
 // connect to a database
 const mongoose = require( 'mongoose' );
 const mongodb_URI = process.env.MONGODB_URI // was 'mongodb://localhost/hsad'
@@ -31,6 +29,8 @@ const isLoggedIn = (req,res,next) => {
 
 // Now we create the server
 const app = express();
+const http1 = require("http").createServer(app);
+const io = require("socket.io")(http1);
 
 // Here we specify that we will be using EJS as our view engine
 app.set("views", path.join(__dirname, "views"));
@@ -91,6 +91,18 @@ app.get("/quiz", (req, res) => {
 
 app.get("/post-game-survey", (req, res) => {
   res.render("post-game-survey");
+});
+
+app.get("/chat-room", (req, res) => {
+  res.render("chat-room")
+})
+
+io.on('connection', (socket) => {
+  console.log('a user connected')
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg)
+    io.emit('chat message', msg);
+  });
 });
 
 const SurveyData = require('./models/SurveyData');

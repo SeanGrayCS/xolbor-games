@@ -1,0 +1,46 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<div class="jumbotron">
+  <h1>
+    Chat Room
+  </h1>
+  <br>
+  <h3>
+    Chat With Everyone Here
+  </h3>
+</div>
+
+<hr>
+
+<body>
+  <h3>
+    Messages:
+  </h3>
+  <br>
+  <ul id="messages"></ul>
+  <form action="">
+    <input id="chat" autocomplete="off" /><button>Send</button>
+  </form>
+  
+  <script>
+    $(function () {
+      var socket = io();
+      $('form').submit(function(e) {
+        e.preventDefault();
+        socket.emit('chat message', $('#chat').val());
+        $('#chat').val('');
+        return false;
+      });
+      socket.on('chat message', function(msg) {
+        $('#messages').append($('<li>').text(msg));
+      })
+    });
+  </script>
+  
+</body>
+
+<hr>
+
+<%- include('link-to-survey') -%>
+<%- include('bootfooter') -%>
