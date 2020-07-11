@@ -11,8 +11,6 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const debug = require("debug")("personalapp:server");
 
-
-
 // connect to a database
 const mongoose = require( 'mongoose' );
 const mongodb_URI = process.env.MONGODB_URI // was 'mongodb://localhost/hsad'
@@ -31,6 +29,18 @@ const isLoggedIn = (req,res,next) => {
 
 // Now we create the server
 const app = express();
+
+//Here we set the ports to use
+const port = "3000";
+app.set("port", port);
+
+// and now we startup the server listening on that port
+const http = require("http");
+const server = http.createServer(app);
+
+server.listen(port);
+
+const io = require("socket.io")(server);
 
 // Here we specify that we will be using EJS as our view engine
 app.set("views", path.join(__dirname, "views"));
@@ -70,7 +80,7 @@ app.use(function(req, res, next) {
 
 // here we start handling routes
 app.get("/", (req, res, next) => {  
-  res.render("index", { title: "Xolbor Games" });
+  res.render("index", { title: "Xolbor Gamez" });
 });
 
 app.get("/games", (req, res, next) => {
@@ -91,6 +101,16 @@ app.get("/quiz", (req, res) => {
 
 app.get("/post-game-survey", (req, res) => {
   res.render("post-game-survey");
+});
+
+app.get("/chat-room", (req, res) => {
+  res.render("chat-room")
+})
+
+io.on('connection', (socket) => {
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
 });
 
 const SurveyData = require('./models/SurveyData');
@@ -241,7 +261,9 @@ app.post('/makeAdmin', async (req, res, next) => {
 
 app.post('/removeAdmin', async (req, res, next) => {
   try {
+    if (req.body.id != "5f087750382522075b804fcc") {
     await User.update({_id:req.body.id}, {$set:{admin:false}})
+    }
     res.redirect('/admin')
   } catch(e) {
     next(e)
@@ -250,7 +272,9 @@ app.post('/removeAdmin', async (req, res, next) => {
 
 app.post('/removeUser', async (req, res, next) => {
   try {
-    await User.remove({_id:req.body.id})
+    if (req.body.id != "5f087750382522075b804fcc") {
+      await User.remove({_id:req.body.id})
+    }
     res.redirect('/admin')
   } catch(e) {
     next(e)
@@ -289,16 +313,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-//Here we set the port to use
-const port = "5000";
-app.set("port", port);
-
-// and now we startup the server listening on that port
-const http = require("http");
-const server = http.createServer(app);
-
-server.listen(port);
 
 function onListening() {
   var addr = server.address();
