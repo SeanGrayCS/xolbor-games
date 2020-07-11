@@ -108,8 +108,11 @@ app.get("/chat-room", (req, res) => {
 })
 
 io.on('connection', (socket) => {
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+  socket.on('chat message chatroom', (msg) => {
+    io.emit('chat message chatroom', msg);
+  });
+  socket.on('chat message mafia', (msg) => {
+    io.emit('chat message mafia', msg);
   });
 });
 

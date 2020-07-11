@@ -34,9 +34,21 @@
 </div>
 
 <body>
-  <!--
-     Code for game goes here.
-  -->
+  <div class="row">
+    <div class="col">
+      
+    </div>
+    <div class="col">
+      <h3>
+        Chat:
+      </h3>
+      <%- include('chatbox') -%>
+      <script>
+        var room = "mafia";
+        document.getElementById("extraInputs").innerHTML = '<select id="recipientType" name="recipientType"><option>Everyone</option><option>One Person</option></select><br>Username of Recipient (One Person): <input type="text" id="recipient" name="recipient">';
+      </script>
+    </div>
+  </div>
 </body>
 
 <hr>
