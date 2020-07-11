@@ -16,12 +16,12 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     var socket = io();
-    var request = 'chat message ' + room;
+    var request = 'chat message';
     document.getElementById("sendChat").addEventListener("submit", function (e) {
       e.preventDefault();
       let user = document.getElementById("user").value || "Guest"
       let date = new Date();
-      var msg = {user:user, msg:document.getElementById("chat").value, date:date};
+      var msg = {user:user, msg:document.getElementById("chat").value, date:date, room:room};
       if (document.getElementById("recipientType")) {
         let recipientType = document.getElementById("recipientType").value;
         msg.recipientType = recipientType;
@@ -31,14 +31,13 @@
         document.getElementById("recipient").value = '';
         msg.recipient = recipient;
       }
-      console.log(msg);
       socket.emit(request, msg);
       document.getElementById("chat").value = '';
       return false;
     });
     socket.on(request, (msg) => {
-      if ((!msg.hasOwnProperty('recipientType')) || (msg.recipientType != "One Person") || (msg.recipient == "<%= username %>"
-                                                                                           )) { //Do not format this, the line break is necessary.
+      if ((msg.room == room) && ((!msg.hasOwnProperty('recipientType')) || (msg.recipientType != "One Person") || (msg.recipient == "<%= username %>"
+                                                                                           ))) { //Do not format this, the line break is necessary.
         document.getElementById("messages").innerHTML = '<tr><td>' + msg.user + '</td><td>' + msg.msg + '</td><td>' + msg.date + '</td></tr>' + document.getElementById("messages").innerHTML;
       }
     })
