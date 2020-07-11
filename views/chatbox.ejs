@@ -39,7 +39,7 @@
     socket.on(request, (msg) => {
       if ((!msg.hasOwnProperty('recipientType')) || (msg.recipientType != "One Person") || (msg.recipient == "<%= username %>"
                                                                                            )) { //Do not format this, the line break is necessary.
-        document.getElementById("messages").innerHTML += '<tr><td>' + msg.user + '</td><td>' + msg.msg + '</td><td>' + msg.date + '</td></tr>';
+        document.getElementById("messages").innerHTML = '<tr><td>' + msg.user + '</td><td>' + msg.msg + '</td><td>' + msg.date + '</td></tr>' + document.getElementById("messages").innerHTML;
       }
     })
   })
