@@ -4,6 +4,25 @@
     <th>Message</th>
     <th>Date/Time</th>
   </thead>
+  <% chats.forEach(chat => { %>
+    <tr>
+      <td><%= chat.username %></td>
+      <td><%= chat.message %></td>
+      <% if (chat.date.getMinutes() < 10) { %>
+        <% if (chat.date.getHours() > 12) { %>
+          <td> <%= chat.date.getHours() - 12 %>:0<%= chat.date.getMinutes() %>pm</td>
+        <% } else { %>
+          <td> <%= chat.date.getHours() %>:0<%= chat.date.getMinutes() %>am</td>
+        <% } %>
+      <% } else { %>
+        <% if (chat.date.getHours() > 12) { %>
+          <td> <%= chat.date.getHours() - 12 %>:<%= chat.date.getMinutes() %>pm</td>
+        <% } else { %>
+          <td> <%= chat.date.getHours() %>:<%= chat.date.getMinutes() %>am</td>
+        <% } %>
+      <% } %>
+    </tr>
+  <% }) %>
 </table>
   
 <form id="sendChat">
@@ -38,7 +57,18 @@
     socket.on(request, (msg) => {
       if ((msg.room == room) && ((!msg.hasOwnProperty('recipientType')) || (msg.recipientType != "One Person") || (msg.recipient == "<%= username %>"
                                                                                            ))) { //Do not format this, the line break is necessary.
-        document.getElementById("messages").innerHTML = '<tr><td>' + msg.user + '</td><td>' + msg.msg + '</td><td>' + msg.date + '</td></tr>' + document.getElementById("messages").innerHTML;
+        var date = new Date();
+        var ampm = "am";
+        var hours = date.getHours();
+        var mins = date.getMinutes();
+        if (date.getHours() > 12) {
+          hours = date.getHours() - 12;
+          ampm = "pm";
+        }
+        if (date.getMinutes() < 10) {
+          mins = "0" + date.getMinutes();
+        }
+        document.getElementById("messages").innerHTML = '<tr><td>' + msg.user + '</td><td>' + msg.msg + '</td><td>' + hours + ":" + mins + ampm + '</td></tr>' + document.getElementById("messages").innerHTML;
       }
     })
   })

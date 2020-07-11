@@ -24,7 +24,19 @@
         
         <tr>
           <td> <%= survey.username %> </td>
-          <td> <%= survey.date %> </td>
+          <% if (survey.date.getMinutes() < 10) { %>
+            <% if (survey.date.getHours() > 12) { %>
+              <td> <%= survey.date.getMonth() %>/<%= survey.date.getDate() %>/<%= survey.date.getFullYear() %> <%= survey.date.getHours() - 12 %>:0<%= survey.date.getMinutes() %>pm</td>
+            <% } else { %>
+              <td> <%= survey.date.getMonth() %>/<%= survey.date.getDate() %>/<%= survey.date.getFullYear() %> <%= survey.date.getHours() %>:0<%= survey.date.getMinutes() %>am</td>
+            <% } %>
+          <% } else { %>
+            <% if (survey.date.getHours() > 12) { %>
+              <td> <%= survey.date.getMonth() %>/<%= survey.date.getDate() %>/<%= survey.date.getFullYear() %> <%= survey.date.getHours() - 12 %>:<%= survey.date.getMinutes() %>pm</td>
+            <% } else { %>
+              <td> <%= survey.date.getMonth() %>/<%= survey.date.getDate() %>/<%= survey.date.getFullYear() %> <%= survey.date.getHours() %>:<%= survey.date.getMinutes() %>am</td>
+            <% } %>
+          <% } %>
           <td> <%= survey.game %> </td>
           <td> <%= survey.rating %> </td>
           <td> <%= survey.wouldRecommend %> </td>

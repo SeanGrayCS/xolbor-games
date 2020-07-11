@@ -91,8 +91,16 @@ app.get("/find-the-number", (req, res) => {
   res.render("find-the-number");
 });
 
-app.get("/mafia", (req, res) => {
-  res.render("mafia");
+app.get("/mafia", async (req, res, next) => {
+  try {
+    var tenMinAgo = new Date();
+    tenMinAgo.setTime(tenMinAgo.getTime() - 600000);
+    var mili = tenMinAgo.getTime();
+    res.locals.chats = await ChatMessage.find({room:"mafia", recipientType:"Everyone", dateMili:{$gte:mili}}).sort({date:-1}); 
+    res.render("mafia")
+  } catch (e) {
+    next(e);
+  }
 });
 
 app.get("/quiz", (req, res) => {
@@ -103,12 +111,28 @@ app.get("/post-game-survey", (req, res) => {
   res.render("post-game-survey");
 });
 
-app.get("/chat-room", (req, res) => {
-  res.render("chat-room")
+app.get("/chat-room", async (req, res, next) => {
+  try {
+    var tenMinAgo = new Date();
+    tenMinAgo.setTime(tenMinAgo.getTime() - 600000);
+    var mili = tenMinAgo.getTime();
+    res.locals.chats = await ChatMessage.find({room:"chatroom", dateMili:{$gte:mili}}).sort({date:-1}); 
+    res.render("chat-room")
+  } catch (e) {
+    next(e);
+  }
 })
 
+const ChatMessage = require('./models/ChatMessage');
+
 io.on('connection', (socket) => {
-  socket.on('chat message', (msg) => {
+  socket.on('chat message', async (msg) => {
+    var recipientType = msg.recipientType || "Everyone"
+    var recipient = msg.recipient || ""
+    var date = new Date();
+    var dateMili = date.getTime();
+    const chat = new ChatMessage({username:msg.user, room:msg.room, message:msg.msg, recipientType:recipientType, recipient:recipient, date:date, dateMili:dateMili});
+    await chat.save();
     io.emit('chat message', msg);
   });
 });
@@ -132,6 +156,15 @@ app.get("/showformdata", async (req, res, next) => {
   try {
     res.locals.surveys = await SurveyData.find().sort({date:-1})
     res.render("showformdata");
+  } catch (e) {
+    next(e);
+  }    
+})
+
+app.get("/showchats", async (req, res, next) => {
+  try {
+    res.locals.chats = await ChatMessage.find().sort({date:-1})
+    res.render("showchats");
   } catch (e) {
     next(e);
   }    
@@ -165,6 +198,15 @@ app.post('/removePost', async (req, res, next) => {
   try {
     await ForumPost.remove({_id:req.body.id})
     res.redirect('/forum')
+  } catch(e) {
+    next(e)
+  }
+})
+
+app.post('/removeChat', async (req, res, next) => {
+  try {
+    await ChatMessage.remove({_id:req.body.id})
+    res.redirect('/showchats')
   } catch(e) {
     next(e)
   }

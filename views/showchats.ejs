@@ -1,0 +1,67 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<% if (loggedIn && isAdmin) { %>
+
+<body>
+  <h1>
+    Chat Messages: 
+  </h1>
+  
+  <p>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>Username</th>
+        <th>Date</th>
+        <th>Room</th>
+        <th>Recipient</th>
+        <th>Message</th>
+        <th>Removal</th>
+      </thead>
+      <tbody>
+        <% chats.forEach(chat => { %>
+        
+        <tr>
+          <td> <%= chat.username %> </td>
+          <td> <%= chat.date %></td>
+          <!--
+          <% /*if (chat.date.getMinutes() < 10) { %>
+            <% if (chat.date.getHours() > 12) { %>
+              <td> <%= chat.date.getMonth() %>/<%= chat.date.getDate() %>/<%= chat.date.getFullYear() %> <%= chat.date.getHours() - 12 %>:0<%= chat.date.getMinutes() %>pm</td>
+            <% } else { %>
+              <td> <%= chat.date.getMonth() %>/<%= chat.date.getDate() %>/<%= chat.date.getFullYear() %> <%= chat.date.getHours() %>:0<%= chat.date.getMinutes() %>am</td>
+            <% } %>
+          <% } else { %>
+            <% if (chat.date.getHours() > 12) { %>
+              <td> <%= chat.date.getMonth() %>/<%= chat.date.getDate() %>/<%= chat.date.getFullYear() %> <%= chat.date.getHours() - 12 %>:<%= chat.date.getMinutes() %>pm</td>
+            <% } else { %>
+              <td> <%= chat.date.getMonth() %>/<%= chat.date.getDate() %>/<%= chat.date.getFullYear() %> <%= chat.date.getHours() %>:<%= chat.date.getMinutes() %>am</td>
+            <% } %>
+          <% } */%>
+          -->
+          
+          <td> <%= chat.room %> </td>
+          <td> <%= chat.recipient || "Everyone" %> </td>
+          <td> <%= chat.message %> </td>
+          <td>
+          <form method="post" action="/removeChat">
+            <input type="hidden" name="id" value="<%= chat._id %>">
+            <input type="submit" value="Remove Chat">
+          </form>
+          </td>
+        </tr>
+      
+        <% }) %>
+      </tbody>
+    </table>
+  </p>
+  
+</body>
+
+<% } else { %>
+
+<a href="/">You must be an admin to use this page.</a>
+
+<% } %>
+
+<%- include('bootfooter') -%>
