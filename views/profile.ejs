@@ -3,6 +3,7 @@
 
 <% if(user === null) { %>
 <!-- /profile page -->
+
 <div class="jumbotron row">
   <div class="col">
     <h1>
@@ -34,6 +35,7 @@ Phone Number:  <br>
 Address:  <br>
   
 <!-- I want to make it so that if there is no email when they made an account, that they can put in their email, But I can't figure it out. Someone help?
+     I've set it up so that email is necessary for account creation, so we don't need to do this - if you have an account that doesn't have an email, put it the username and email here and I'll do it manually. - Sean
 
 <@% if <@%= email %> === null { %>
 
@@ -50,7 +52,8 @@ Address:  <br>
 <@% } %>
 -->
   
-Profile Picture: <!-- You guys wanna add profile pictures? if we do, then make 2 collumns and profile picture on right column -->
+Profile Picture: <!-- You guys wanna add profile pictures? if we do, then make 2 collumns and profile picture on right column 
+                      Hold off on actually setting up profile pictures, it could be quite difficult, and will require doing stuff I don't know how to do yet - Sean -->
 
   
 </h5>
@@ -64,27 +67,32 @@ Profile Picture: <!-- You guys wanna add profile pictures? if we do, then make 2
 <select name="gamenames">
   <option>Quiz</option>
 </select>
-Rank: <!-- I can't figure out how to get their rankings for the Quiz game. I am trying to use <.%= count++ %> just like in the leaderboards, but it is not working? -->
+Rank: <!-- I can't figure out how to get their rankings for the Quiz game. I am trying to use <.%= count++ %> just like in the leaderboards, but it is not working? 
+           Don't worry about it for now, it will take extra database work to make that happen. I was kinda lazy when setting it up lol - Sean -->
 
 <% } else { %>
-<!-- /profile/userId page -->
-
-
-
-
-
+<!-- /profile/username page -->
 
 <div class="jumbotron">
   <h1>
-    User Profile
+    User Profile - <%= user.username %>
   </h1>
   <br>
 </div>
 
 <body>
-  Username: 
-  <%= user.username %>
-  <br>
+  <h4>
+    Username: 
+    <%= user.username %>
+    <br>
+  </h4>
+  <hr>
+  <h2>
+    <%= user.username %>'s Rankings (in games that have rankings):
+  </h2>
+  <select name="gamenames">
+    <option>Quiz</option>
+  </select>
 </body>
 
 <hr>

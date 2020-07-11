@@ -18,24 +18,39 @@
     Messages:
   </h3>
   <br>
+  
+  <table id="messages" class="table table-bordered table-striped">
+    <thead>
+      <th>Username</th>
+      <th>Message</th>
+      <th>Date/Time</th>
+    </thead>
+  </table>
+  
   <ul id="messages"></ul>
-  <form action="">
+  
+  
+  <form id="sendChat">
+    <input type="hidden" id="user" autocomplete="off" value="<%= username %>" />
     <input id="chat" autocomplete="off" /><button>Send</button>
   </form>
   
   <script>
-    $(function () {
+    document.addEventListener("DOMContentLoaded", () => {
       var socket = io();
-      $('form').submit(function(e) {
+      document.getElementById("sendChat").addEventListener("submit", function (e) {
         e.preventDefault();
-        socket.emit('chat message', $('#chat').val());
-        $('#chat').val('');
+        let user = document.getElementById("user").value || "Guest"
+        let date = new Date();
+        let msg = {user:user, msg:document.getElementById("chat").value, date:date};
+        socket.emit('chat message', msg);
+        document.getElementById("chat").value = '';
         return false;
       });
-      socket.on('chat message', function(msg) {
-        $('#messages').append($('<li>').text(msg));
+      socket.on('chat message', (msg) => {
+        document.getElementById("messages").innerHTML += '<tr><td>' + msg.user + '</td><td>' + msg.msg + '</td><td>' + msg.date + '</td></tr>';
       })
-    });
+    })
   </script>
   
 </body>
