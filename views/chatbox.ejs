@@ -1,0 +1,46 @@
+<table id="messages" class="table table-bordered table-striped">
+  <thead>
+    <th>Username</th>
+    <th>Message</th>
+    <th>Date/Time</th>
+  </thead>
+</table>
+  
+<form id="sendChat">
+  <div id="extraInputs"></div>
+  Message:
+  <input type="hidden" id="user" autocomplete="off" value="<%= username %>" />
+  <input id="chat" autocomplete="off" /><button>Send</button>
+</form>
+  
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'chat message ' + room;
+    document.getElementById("sendChat").addEventListener("submit", function (e) {
+      e.preventDefault();
+      let user = document.getElementById("user").value || "Guest"
+      let date = new Date();
+      var msg = {user:user, msg:document.getElementById("chat").value, date:date};
+      if (document.getElementById("recipientType")) {
+        let recipientType = document.getElementById("recipientType").value;
+        msg.recipientType = recipientType;
+      }
+      if (document.getElementById("recipient")) {
+        let recipient = document.getElementById("recipient").value;
+        document.getElementById("recipient").value = '';
+        msg.recipient = recipient;
+      }
+      console.log(msg);
+      socket.emit(request, msg);
+      document.getElementById("chat").value = '';
+      return false;
+    });
+    socket.on(request, (msg) => {
+      if ((!msg.hasOwnProperty('recipientType')) || (msg.recipientType != "One Person") || (msg.recipient == "<%= username %>"
+                                                                                           )) { //Do not format this, the line break is necessary.
+        document.getElementById("messages").innerHTML += '<tr><td>' + msg.user + '</td><td>' + msg.msg + '</td><td>' + msg.date + '</td></tr>';
+      }
+    })
+  })
+</script>
