@@ -22,18 +22,30 @@
       </thead>
       <tbody>
         <% var count = 1 %>
-        <% quizzes.forEach(x => { %>
+        <% quizzes.forEach(quiz => { %>
         
-        <tr>
-          <td> <%= count++ %> </td>
-          <td> <%= x.username %> </td>
-          <td> <%= x.numCorrect %> </td>
-          <td> <%= x.totalQ %> </td>
-          <td> <%= x.percent * 100 %>% </td>
-          <td> <%= x.date %> </td>
-        </tr>
+          <tr>
+            <td> <%= count++ %> </td>
+            <td> <%= quiz.username %> </td>
+            <td> <%= quiz.numCorrect %> </td>
+            <td> <%= quiz.totalQ %> </td>
+            <td> <%= quiz.percent * 100 %>% </td>
+            <% if (quiz.date.getMinutes() < 10) { %>
+              <% if (quiz.date.getHours() > 12) { %>
+                <td> <%= quiz.date.getMonth() %>/<%= quiz.date.getDate() %>/<%= quiz.date.getFullYear() %> <%= quiz.date.getHours() - 12 %>:0<%= quiz.date.getMinutes() %>pm</td>
+              <% } else { %>
+                <td> <%= quiz.date.getMonth() %>/<%= quiz.date.getDate() %>/<%= quiz.date.getFullYear() %> <%= quiz.date.getHours() %>:0<%= quiz.date.getMinutes() %>am</td>
+              <% } %>
+            <% } else { %>
+              <% if (quiz.date.getHours() > 12) { %>
+                <td> <%= quiz.date.getMonth() %>/<%= quiz.date.getDate() %>/<%= quiz.date.getFullYear() %> <%= quiz.date.getHours() - 12 %>:<%= quiz.date.getMinutes() %>pm</td>
+              <% } else { %>
+                <td> <%= quiz.date.getMonth() %>/<%= quiz.date.getDate() %>/<%= quiz.date.getFullYear() %> <%= quiz.date.getHours() %>:<%= quiz.date.getMinutes() %>am</td>
+              <% } %>
+            <% } %>
+          </tr>
       
-      <% }) %>
+        <% }) %>
       </tbody>
     </table>
   </p>

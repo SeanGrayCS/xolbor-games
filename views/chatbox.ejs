@@ -4,7 +4,25 @@
     <th>Message</th>
     <th>Date/Time</th>
   </thead>
+  
 </table>
+<% chats.forEach(chat => { %>
+<script>
+  var chat = <%- chat %>
+    var date = new Date(chat.date);
+    var mins = date.getMinutes();
+    var hours = date.getHours();
+    var ampm = "am";
+    if (mins < 10) {
+      mins = "0" + mins
+    }
+    if (hours > 12) {
+      hours -= 12;
+      ampm = "pm"
+    }
+    document.getElementById("messages").innerHTML = '<tr><td>' + chat.username + '</td><td>' + chat.message + '</td><td>' + hours + ":" + mins + ampm + '</td></tr>' + document.getElementById("messages").innerHTML;  
+</script>
+<% }) %>
   
 <form id="sendChat">
   <div id="extraInputs"></div>
@@ -16,12 +34,13 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     var socket = io();
-    var request = 'chat message ' + room;
+    var request = 'chat message';
     document.getElementById("sendChat").addEventListener("submit", function (e) {
       e.preventDefault();
       let user = document.getElementById("user").value || "Guest"
       let date = new Date();
-      var msg = {user:user, msg:document.getElementById("chat").value, date:date};
+      let isoDate = date.toISOString();
+      var msg = {user:user, msg:document.getElementById("chat").value, date:isoDate, room:room};
       if (document.getElementById("recipientType")) {
         let recipientType = document.getElementById("recipientType").value;
         msg.recipientType = recipientType;
@@ -31,15 +50,25 @@
         document.getElementById("recipient").value = '';
         msg.recipient = recipient;
       }
-      console.log(msg);
       socket.emit(request, msg);
       document.getElementById("chat").value = '';
       return false;
     });
     socket.on(request, (msg) => {
-      if ((!msg.hasOwnProperty('recipientType')) || (msg.recipientType != "One Person") || (msg.recipient == "<%= username %>"
-                                                                                           )) { //Do not format this, the line break is necessary.
-        document.getElementById("messages").innerHTML += '<tr><td>' + msg.user + '</td><td>' + msg.msg + '</td><td>' + msg.date + '</td></tr>';
+      if ((msg.room == room) && ((!msg.hasOwnProperty('recipientType')) || (msg.recipientType != "One Person") || (msg.recipient == "<%= username %>"
+                                                                                           ))) { //Do not format this, the line break is necessary.
+        var date = new Date(msg.date);
+        var ampm = "am";
+        var hours = date.getHours();
+        var mins = date.getMinutes();
+        if (hours > 12) {
+          hours = date.getHours() - 12;
+          ampm = "pm";
+        }
+        if (mins < 10) {
+          mins = "0" + date.getMinutes();
+        }
+        document.getElementById("messages").innerHTML = '<tr><td>' + msg.user + '</td><td>' + msg.msg + '</td><td>' + hours + ":" + mins + ampm + '</td></tr>' + document.getElementById("messages").innerHTML;
       }
     })
   })

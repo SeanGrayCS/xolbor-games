@@ -47,7 +47,19 @@
       <td><%= post.username %></td> 
       <td><%= post.topic %></td>
       <td><%= post.message %></td>  
-      <td><%= post.date %></td>
+      <% if (post.date.getMinutes() < 10) { %>
+        <% if (post.date.getHours() > 12) { %>
+          <td> <%= post.date.getMonth() %>/<%= post.date.getDate() %>/<%= post.date.getFullYear() %> <%= post.date.getHours() - 12 %>:0<%= post.date.getMinutes() %>pm</td>
+        <% } else { %>
+          <td> <%= post.date.getMonth() %>/<%= post.date.getDate() %>/<%= post.date.getFullYear() %> <%= post.date.getHours() %>:0<%= post.date.getMinutes() %>am</td>
+        <% } %>
+      <% } else { %>
+        <% if (post.date.getHours() > 12) { %>
+          <td> <%= post.date.getMonth() %>/<%= post.date.getDate() %>/<%= post.date.getFullYear() %> <%= post.date.getHours() - 12 %>:<%= post.date.getMinutes() %>pm</td>
+        <% } else { %>
+          <td> <%= post.date.getMonth() %>/<%= post.date.getDate() %>/<%= post.date.getFullYear() %> <%= post.date.getHours() %>:<%= post.date.getMinutes() %>am</td>
+        <% } %>
+      <% } %>
       <% if(isAdmin) { %>
       <td>
         <form method="post" action="/removePost">

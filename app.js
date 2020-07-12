@@ -91,8 +91,16 @@ app.get("/find-the-number", (req, res) => {
   res.render("find-the-number");
 });
 
-app.get("/mafia", (req, res) => {
-  res.render("mafia");
+app.get("/mafia", async (req, res, next) => {
+  try {
+    var tenMinAgo = new Date();
+    tenMinAgo.setTime(tenMinAgo.getTime() - 600000);
+    var mili = tenMinAgo.getTime();
+    res.locals.chats = await ChatMessage.find({room:"mafia", recipientType:"Everyone", dateMili:{$gte:mili}}, {_id:0}).sort({date:-1}); 
+    res.render("mafia")
+  } catch (e) {
+    next(e);
+  }
 });
 
 app.get("/quiz", (req, res) => {
@@ -103,16 +111,29 @@ app.get("/post-game-survey", (req, res) => {
   res.render("post-game-survey");
 });
 
-app.get("/chat-room", (req, res) => {
-  res.render("chat-room")
+app.get("/chat-room", async (req, res, next) => {
+  try {
+    var tenMinAgo = new Date();
+    tenMinAgo.setTime(tenMinAgo.getTime() - 600000);
+    var mili = tenMinAgo.getTime();
+    res.locals.chats = await ChatMessage.find({room:"chatroom", dateMili:{$gte:mili}}, {_id:0}).sort({date:1});
+    res.render("chat-room")
+  } catch (e) {
+    next(e);
+  }
 })
 
+const ChatMessage = require('./models/ChatMessage');
+
 io.on('connection', (socket) => {
-  socket.on('chat message chatroom', (msg) => {
-    io.emit('chat message chatroom', msg);
-  });
-  socket.on('chat message mafia', (msg) => {
-    io.emit('chat message mafia', msg);
+  socket.on('chat message', async (msg) => {
+    const recipientType = msg.recipientType || "Everyone"
+    const recipient = msg.recipient || ""
+    const date = new Date(msg.date);
+    const dateMili = date.getTime();
+    const chat = new ChatMessage({username:msg.user, room:msg.room, message:msg.msg, recipientType:recipientType, recipient:recipient, date:msg.date, dateMili:dateMili});
+    await chat.save();
+    io.emit('chat message', msg);
   });
 });
 
@@ -264,7 +285,7 @@ app.post('/makeAdmin', async (req, res, next) => {
 
 app.post('/removeAdmin', async (req, res, next) => {
   try {
-    if (req.body.id != "5f087750382522075b804fcc") {
+    if (req.body.id != "5f0b47f97a107307a986b1c1") {
     await User.update({_id:req.body.id}, {$set:{admin:false}})
     }
     res.redirect('/admin')
@@ -275,7 +296,7 @@ app.post('/removeAdmin', async (req, res, next) => {
 
 app.post('/removeUser', async (req, res, next) => {
   try {
-    if (req.body.id != "5f087750382522075b804fcc") {
+    if (req.body.id != "5f0b47f97a107307a986b1c1") {
       await User.remove({_id:req.body.id})
     }
     res.redirect('/admin')
