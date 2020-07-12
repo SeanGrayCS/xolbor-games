@@ -10,4 +10,3 @@ var postSchema = Schema( {
 } );
 
 module.exports = mongoose.model("ForumPostTeam2", postSchema);
-

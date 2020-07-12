@@ -35,7 +35,7 @@
         
         <li class="nav-item">
           <a class="nav-link" href="/chat-room">Chat Room</a>
-        </li>        
+        </li>
         
         <% if (loggedIn && isAdmin) { %>
         <li class="nav-item dropdown">
@@ -50,23 +50,7 @@
               
               <a class="dropdown-item" href="/showformdata">Survey Data</a>
            </div>
-         </li>
-        
-        
-        <!-- Old code for admin
-          <li class="nav-item">
-            <a class="nav-link" href="/admin">Admin</a>
-          </li>
-        
-          <li class="nav-item">
-            <a class="nav-link" href="/showUsers">Show Users</a>
-          </li>
-        
-          <li class="nav-item">
-            <a class="nav-link" href="/showformdata">Survey Data</a>
-          </li>
-        -->
-    
+        </li> 
         <% } %>
       
         <% if (!loggedIn) {%>
@@ -86,7 +70,6 @@
             <a class="dropdown-item" href="/logout">Logout</a>
           </div>
         </li>
-        </li> <!-- I see that this </li> is here, but I don't see a <li> that starts it. Am I just missing something? or can we just delete it? -->
         <% } %>
       
       </ul>

@@ -96,7 +96,7 @@ app.get("/mafia", async (req, res, next) => {
     var tenMinAgo = new Date();
     tenMinAgo.setTime(tenMinAgo.getTime() - 600000);
     var mili = tenMinAgo.getTime();
-    res.locals.chats = await ChatMessage.find({room:"mafia", recipientType:"Everyone", dateMili:{$gte:mili}}).sort({date:-1}); 
+    res.locals.chats = await ChatMessage.find({room:"mafia", recipientType:"Everyone", dateMili:{$gte:mili}}, {_id:0}).sort({date:-1}); 
     res.render("mafia")
   } catch (e) {
     next(e);
@@ -116,7 +116,7 @@ app.get("/chat-room", async (req, res, next) => {
     var tenMinAgo = new Date();
     tenMinAgo.setTime(tenMinAgo.getTime() - 600000);
     var mili = tenMinAgo.getTime();
-    res.locals.chats = await ChatMessage.find({room:"chatroom", dateMili:{$gte:mili}}).sort({date:-1}); 
+    res.locals.chats = await ChatMessage.find({room:"chatroom", dateMili:{$gte:mili}}, {_id:0}).sort({date:1});
     res.render("chat-room")
   } catch (e) {
     next(e);
@@ -127,11 +127,11 @@ const ChatMessage = require('./models/ChatMessage');
 
 io.on('connection', (socket) => {
   socket.on('chat message', async (msg) => {
-    var recipientType = msg.recipientType || "Everyone"
-    var recipient = msg.recipient || ""
-    var date = new Date();
-    var dateMili = date.getTime();
-    const chat = new ChatMessage({username:msg.user, room:msg.room, message:msg.msg, recipientType:recipientType, recipient:recipient, date:date, dateMili:dateMili});
+    const recipientType = msg.recipientType || "Everyone"
+    const recipient = msg.recipient || ""
+    const date = new Date(msg.date);
+    const dateMili = date.getTime();
+    const chat = new ChatMessage({username:msg.user, room:msg.room, message:msg.msg, recipientType:recipientType, recipient:recipient, date:msg.date, dateMili:dateMili});
     await chat.save();
     io.emit('chat message', msg);
   });
@@ -156,15 +156,6 @@ app.get("/showformdata", async (req, res, next) => {
   try {
     res.locals.surveys = await SurveyData.find().sort({date:-1})
     res.render("showformdata");
-  } catch (e) {
-    next(e);
-  }    
-})
-
-app.get("/showchats", async (req, res, next) => {
-  try {
-    res.locals.chats = await ChatMessage.find().sort({date:-1})
-    res.render("showchats");
   } catch (e) {
     next(e);
   }    
@@ -198,15 +189,6 @@ app.post('/removePost', async (req, res, next) => {
   try {
     await ForumPost.remove({_id:req.body.id})
     res.redirect('/forum')
-  } catch(e) {
-    next(e)
-  }
-})
-
-app.post('/removeChat', async (req, res, next) => {
-  try {
-    await ChatMessage.remove({_id:req.body.id})
-    res.redirect('/showchats')
   } catch(e) {
     next(e)
   }
@@ -303,7 +285,7 @@ app.post('/makeAdmin', async (req, res, next) => {
 
 app.post('/removeAdmin', async (req, res, next) => {
   try {
-    if (req.body.id != "5f087750382522075b804fcc") {
+    if (req.body.id != "5f0b47f97a107307a986b1c1") {
     await User.update({_id:req.body.id}, {$set:{admin:false}})
     }
     res.redirect('/admin')
@@ -314,7 +296,7 @@ app.post('/removeAdmin', async (req, res, next) => {
 
 app.post('/removeUser', async (req, res, next) => {
   try {
-    if (req.body.id != "5f087750382522075b804fcc") {
+    if (req.body.id != "5f0b47f97a107307a986b1c1") {
       await User.remove({_id:req.body.id})
     }
     res.redirect('/admin')
