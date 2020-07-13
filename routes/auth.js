@@ -75,10 +75,10 @@ router.post('/signup',
       }else if (passphrase.length < 8) {
         message = "Could not Signup: Passphrases must be at least 8 characters."
         res.redirect('/login')
-      }else if (!(users === null)) {
+      }else if (!(users[0] == null)) {
         message = "Could not Signup: Username is already taken."
         res.redirect('/login')
-      } else if (!(usersEmail === null)) {
+      } else if (!(usersEmail[0] == null)) {
         message = "Could not Signup: Email is already being used for a different account."
         res.redirect('/login')
       }else {
