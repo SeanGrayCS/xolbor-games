@@ -1,14 +1,16 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
-<div class="jumbotron">
+<div class="gradient">
+  <br>
   <h1>
-    <span style="color: #4988fc">Q</span><span style="color: #faa720">U</span><span style="color: #00d652">I</span><span style="color: #3ce7f0">Z</span><span style="color: #ff4f42">!</span>
+    <span style="color: #4988fc">Q</span><span style="color: #faa720">U</span><span style="color: #00d652">I</span><span style="color: #3ce7f0">Z</span><span style="color: #ec3df2">!</span>
   </h1>
   <br>
   <h3>
-    Test your knowledge with our quiz on <span style="color: #4988fc">Geography,</span> <span style="color: #faa720"> History,</span> Sports, and Food!
+    Test your knowledge with our quiz on <span style="color: #4988fc">Geography,</span> <span style="color: #faa720"> History,</span> <span style="color: #00d652"> Sports,</span> and <span style="color: #3ce7f0">Food!</span>
   </h3>
+  <br>
 </div>
 
 <body>
@@ -22,14 +24,19 @@
   
   <!-- Remember to change the name="Q1" to the question number -->
   <% if (loggedIn) { %>
+  <br>
+  <br>
+  <br>
+<div class="quizGradient">
+  
   
   <div class="row">
-    <div class="col" style="color: #dbc744">
-        <h6><strong>  -----Geography----- </strong></h6>
+    <div class="col"> <br>
+        <h6><strong>  -----Geography----- </strong></h6> <br>
     </div>
     <div class="col">
       <h4 style="text-align:right;">
-        <a href="/quiz-results">Leaderboards</a>
+        <a href="/quiz-results" style="color: #00d652">Leaderboards</a>
       </h4>
     </div>
   </div>
@@ -38,8 +45,8 @@
     
 
     
-    <hr>
-   <div class="jumbotron" style="background-color: #4988fc"> 
+    
+   <div >
 <b>Q1: What is the capital of Chile? <br></b>
     Phoenix <input type="radio" name="Q1" value="Phoenix"> <br>
     Santiago <input type="radio" name="Q1" value="Santiago"> <br> <!-- correct -->
@@ -120,13 +127,13 @@
     
      </div>
      
-    <hr>
+    <br>
     
    <h6><strong> -----History----- </strong></h6>
     
-    <hr>
+    <br>
     
-    <div class="jumbotron" style="background-color: #faa720">
+    <div >
       
     <b>Q11: What did the Romans call Scotland? <br> </b>
     Caledonia <input type="radio" name="Q11" value="Caledonia"> <br> <!-- correct -->
@@ -168,13 +175,13 @@
     
     </div>
       
-    <hr>
+    <br>
     
    <h6><strong> -----Sports-----  </strong></h6>
 
-    <hr>
+    <br>
     
-     <div class="jumbotron" style="background-color: #00d652">
+     <div >
     
     <b>Q16: What are the five colours of the Olympic rings (in order)? <br> </b>
     Blue, yellow, black, green and red  <input type="radio" name="Q16" value="BYBGR"> <br> <!-- correct -->
@@ -216,13 +223,13 @@
        
     </div>
     
-    <hr>
+    <br>
     
   <h6><strong>  -----Food and Drink-----  </strong></h6>
     
-    <hr>
+    <br>
     
-    <div class="jumbotron" style="background-color: #46ebe0">
+    <div >
     
     <b>Q21: Which nuts are used in marzipan? <br> </b>
     Almonds <input type="radio" name="Q21" value="Almonds"> <br> <!-- correct -->
@@ -261,200 +268,16 @@
     Striped Bass <input type="radio" name="Q25" value="Striped Bass"> <br> 
     Salmon <input type="radio" name="Q25" value="Salmon"> <br>
     Flounder <input type="radio" name="Q25" value="Flounder"> <br>
-    <hr>
+   
     
     </div>
-    
-  <!--
-    Who provides the voice of Pikachu in the 2019 "Pokémon: Detective Pikachu" movie? <br>
-    Ryan Reynolds <input type="radio" name="Actors" value="Reynolds"> <br>
-    no <input type="radio" name="over 18" value="no" <br> <br>
-    don't want to say <input type="radio" name="over 18" value="maybe"<br>  
-           -->
-<!-- https://www.express.co.uk/life-style/life/1278265/100-general-knowledge-quiz-questions-and-answers       
-
-
-
------Geography-----
-1) What is the capital of Chile?
-  a)
-  b)Santiago (correct)
-  c)
-  d)
-
-2) What is the highest mountain in Britain?
-  a)
-  b)
-  c)Ben Nevis (correct)
-  d)
-
-3) What is the smallest country in the world?
-  a)Monaco
-  b)Nauru
-  c)Israel
-  d)Vatican City (correct)
-
-4) Alberta is a province of which country?
-  a)Canada (correct)
-  b)USA
-  c)Mexico
-  d)Greenland
-
-5) How many countries still have the shilling as currency?
-  a)Three - Kenya, Ethiopia, Uganda
-  b)Four – Kenya, Uganda, Tanzania and Somalia (correct)
-  c)Five - Kenya, Ethiopia, Tanzania, Uganda, Somalia
-  d)Six - Kenya, Madagascar, Ethiopia, Uganda, Somalia, Tanzania
-
-6) Which is the only vowel not used as the first letter in a US State?
-  a)E (correct)
-  b)O
-  c)U
-  d)I
-
-7) What is the largest country in the world?
-  a)USA
-  b)China
-  c)India
-  d)Russia (correct)
-
-8) Where would you find the River Thames?
-  a)Rome, Italy
-  b)Paris, France
-  c)London, UK (correct)
-  d)Madrid, Spain
-
-9) What is the hottest continent on Earth?
-  a)Africa (correct)
-  b)South America
-  c)Asia
-  d)Europe
-
-10) What is the longest river in the world?
-  a)River Nile (correct)
-  b)Congo River
-  c)Yellow River
-  d)Lena River
-    
------History-----
-11) What did the Romans call Scotland?
-  a)Caledonia (correct)
-  b)Scots
-  c)Scottish Lowlands
-  d)Scottish Highlands
-
-12) Who was made Lord Mayor of London In 1397, 1398, 1406 And 1419?
-  a)Thomas Knolles
-  b)Richard Whittington (correct)
-  c)William Martin
-  d)William Cauntbrigge
-
-13) In which year was Joan of Arc burned at the stake?
-  a)1427
-  b)1430
-  c)1431 (correct)
-  d)1434
-
-14) Which English city was once known as Duroliponte?
-  a)Manchester
-  b)Cambridge (correct)
-  c)Birmingham
-  d)London
-
-15) The first successful vaccine was introduced by Edward Jenner in 1796. Which disease did it guard against?
-  a)Cholera
-  b)Smallpox (correct)
-  c)Typhus
-  d)Flu
-
------Sports-----  
-16) What are the five colours of the Olympic rings (in order)?
-  a)Blue, yellow, black, green and red (correct)
-  b)Blue, red, green, yellow, black
-  c)Red, green, black, blue, yellow
-  d)Red, black, green, blue, yellow
-
-17) How many players are there in a rugby league team?
-  a)12
-  b)13 (correct)
-  c)14
-  d)15
-
-18) Which horse is the only three-time winner of the Grand National?
-  a)Foinavon
-  b)Mr Frisk
-  c)Red Rum (correct)
-  d)Aldaniti
-
-19) In tennis, what piece of fruit is found at the top of the men's Wimbledon trophy?
-  a)Dragonfruit
-  b)Passionfruit
-  c)Pear
-  d)Pineapple (correct)
-
-20) How many world titles has Phil Talyor won in darts?
-  a)16 (correct)
-  b)17
-  c)18
-  d)19
-
------Food and Drink-----
-21) Which nuts are used in marzipan?
-  a)Almonds (correct)
-  b)Peanuts
-  c)Cashews
-  d)Walnuts
-
-22) What is the most famous Mexican beer?
-  a)Budweiser
-  b)Heineken
-  c)Corona (lol) (correct)
-  d)Stella Artois
-
-23) Which country is the origin of the cocktail Mojito?
-  a)Mexico
-  b)Cuba (correct)
-  c)Italy
-  d)Spain
-
-24) Which vitamin is the only one that you will not find in an egg?
-  a)Vitamin A
-  b)Vitamin B
-  c)Vitamin C (correct)
-  d)Vitamin D 
-
-25) Which fish is the main ingredient of Scotch Woodcock? 
-  a)Anchovy (correct)
-  b)Striped Bass
-  c)Salmon
-  d)Flounder
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   --> 
-    <input type = "submit" value = "Submit">
+    </div>
+    <br>
+    <input type = "submit" value = "Submit quiz!" style="width: 120px; height: 50px">
   </form>
-  
+
   <% } else { %>
+  <br>
   <div class="row">
     <div class="col">
       <h4>

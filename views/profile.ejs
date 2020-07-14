@@ -4,7 +4,7 @@
 <% if(user === null) { %>
 <!-- /profile page -->
 
-<div class="jumbotron row">
+<div class="jumbotron gradient row">
   <div class="col">
     <h1>
      Your Profile
@@ -18,8 +18,12 @@
     <h3>
       Date/Time: <span id="datetime"></span>
       <script>
+        function showTime () {
           var dt = new Date();
           document.getElementById("datetime").innerHTML = dt.toLocaleTimeString(+1);
+        }
+        showTime();
+        setInterval(showTime, 1000);
       </script>
     </h3>
   </div>

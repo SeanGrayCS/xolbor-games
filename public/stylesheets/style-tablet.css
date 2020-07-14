@@ -71,3 +71,17 @@ strong {
 .jumbotron {
   background-color: #E2E2E2;
 }
+
+.smaller {
+  font-size: .85em;
+}
+
+.gradient {
+    background: linear-gradient(to bottom, #0066cc 0%, #33ccff 100%);
+}
+
+.quizGradient {
+  background: linear-gradient(to bottom, #4988fc 20%, #faa720 43%, #faa720 55%, #00d652 70%, #46ebe0 85%);
+  padding: 20px 30px 20px 30px;
+  border-radius: 15px;
+}

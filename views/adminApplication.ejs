@@ -1,0 +1,87 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+
+
+<div class="gradient">
+  <br>
+  <h1>
+    Admin Application
+  </h1>
+  <h4>
+    Do you want to become an Admin? You may register to become one and help make this community even better!
+  </h4>
+  <p>
+    Requirements:
+  </p>
+  <ul>
+    <li>At least 16 years old</li>
+    <li>Have an active in the community for more than a month</li>
+    <li>Like playing games and having fun!</li>
+  </ul>
+</div>
+<hr>
+
+<% if (loggedIn) { %>
+
+<body>
+  <div class="row">
+    <div class="col">   
+
+      <form method="post" action="/saveAdminApplication">
+        
+        What is your age? <br>
+        <input type="number" name="age"> <br> <br>
+    
+        How has your expererience been while playing on Xolber? <br>
+        <textarea name="experience" rows="10" cols="40"></textarea> <br> <br>
+      
+        What would you offer as an Admin? <br>
+        <textarea name="offer" rows="10" cols="40"></textarea> <br> <br>
+        
+        Why do you want to be an Admin? <br>
+        <textarea name="want" rows="10" cols="40"></textarea> <br> <br>
+     </div>
+
+     <div class="col"> 
+        What would you rate Xolbor from 0-10? <br>
+        <select name="rate">
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+       </select> <br> <br>
+       
+        In your opinion, what is the most important trait of an Admin? <br>
+        <textarea name="trait" rows="10" cols="40"></textarea> <br> <br>
+      
+        How would you change the website for the better? <br>
+        <textarea name="change" rows="10" cols="40"></textarea> <br> <br>
+       
+        Do you have any previous responsibilities similar to this (not needed)? Elaborate if yes. <br>
+        <textarea name="responsibilities" rows="10" cols="40"></textarea> <br> <br>
+      </div>
+    </div>
+    <div class="row">
+        <input type="submit" value="Submit application">
+    </div>
+      </form>
+  </div>
+</body>
+
+<hr>
+
+<% } else { %>
+
+<a href="/login">You must be logged in to submit an Admin Application.</a>
+
+<% } %>
+
+<%- include('bootfooter') -%>

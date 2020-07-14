@@ -19,6 +19,9 @@
         <th>Total Number of Questions</th>
         <th>Percent Correct</th>
         <th>Date</th>
+        <% if(isAdmin) { %>
+        <th>Removal</th>
+        <% } %>
       </thead>
       <tbody>
         <% var count = 1 %>
@@ -42,6 +45,14 @@
               <% } else { %>
                 <td> <%= quiz.date.getMonth() %>/<%= quiz.date.getDate() %>/<%= quiz.date.getFullYear() %> <%= quiz.date.getHours() %>:<%= quiz.date.getMinutes() %>am</td>
               <% } %>
+            <% } %>
+            <% if(isAdmin) { %>
+            <td>
+              <form method="post" action="/removeQuizResult">
+                <input type="hidden" name="id" value="<%= quiz._id %>">
+                <input type="submit" value="Remove Ranking">
+              </form>
+            </td>
             <% } %>
           </tr>
       

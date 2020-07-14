@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/"><img src="https://cdn.glitch.com/fd8bca40-696a-4aba-af5e-c958c9967cc1%2FXOLBORLOGOLIGHT.png?v=1594238117359" width="50%" alt="Logo" style="Filter= FlipH."></a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light menuBarGradient">
+  <a class="navbar-brand" href="/"><img src="https://cdn.glitch.com/323104cc-8422-4df6-b528-2e7418a754c3%2Fthumbnails%2FXolbor%20logo.png?1594674780632" width="100%" alt="Logo"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -37,6 +37,10 @@
           <a class="nav-link" href="/chat-room">Chat Room</a>
         </li>
         
+        <li class="nav-item">
+          <a class="nav-link" href="/adminApplication">Apply for Admin</a>
+        </li>
+        
         <% if (loggedIn && isAdmin) { %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/games" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
@@ -49,15 +53,33 @@
               <a class="dropdown-item" href="/showUsers">Show Users</a>
               
               <a class="dropdown-item" href="/showformdata">Survey Data</a>
+            
+              <a class="dropdown-item" href="/showAdminApplicationData">Admin Application Data</a>
            </div>
         </li> 
         <% } %>
       
         <% if (!loggedIn) {%>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login/Signup</a>
-          </li>
-    
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Signup/Login</a>
+        </li>
+
+  
+        <li class="nav-item smaller">
+          <form method="post" action="/login">
+               <small> Username: <input type="text"
+                                autocomplete="username"
+                                name="username"
+                                size="11"> </small>
+            <br>
+               <small> Passphrase: <input type="password"
+                                  autocomplete="passphrase"
+                                  name="passphrase"
+                                  size="10"> </small>
+            <small><input type="submit" value="Login"></small>
+           </form>
+        </li>
         
         
         <% } else { %>
