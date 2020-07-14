@@ -1,0 +1,66 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<body>
+  <h1>
+    Quiz Leaderboard: 
+  </h1>
+  
+  <p id="data">
+    
+  </p>
+  
+  <p>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Randomly Generated Number (1-1000)</th>
+        <th>Number of Guesses</th>
+        <th>Date</th>
+        <% if(isAdmin) { %>
+        <th>Removal</th>
+        <% } %>
+      </thead>
+      <tbody>
+        <% var count = 1 %>
+        <% leaders.forEach(leader => { %>
+        
+          <tr>
+            <td> <%= count++ %> </td>
+            <td> <%= leader.username %> </td>
+            <td> <%= leader.number %> </td>
+            <td> <%= leader.numGuesses %> </td>
+            <% const date = new Date(leader.date) %>
+            <% if (date.getMinutes() < 10) { %>
+              <% if (date.getHours() > 12) { %>
+                <td> <%= date.getMonth() %>/<%= date.getDate() %>/<%= date.getFullYear() %> <%= date.getHours() - 12 %>:0<%= date.getMinutes() %>pm</td>
+              <% } else { %>
+                <td> <%= date.getMonth() %>/<%= date.getDate() %>/<%= date.getFullYear() %> <%= date.getHours() %>:0<%= date.getMinutes() %>am</td>
+              <% } %>
+            <% } else { %>
+              <% if (date.getHours() > 12) { %>
+                <td> <%= date.getMonth() %>/<%= date.getDate() %>/<%= date.getFullYear() %> <%= date.getHours() - 12 %>:<%= date.getMinutes() %>pm</td>
+              <% } else { %>
+                <td> <%= date.getMonth() %>/<%= date.getDate() %>/<%= date.getFullYear() %> <%= date.getHours() %>:<%= date.getMinutes() %>am</td>
+              <% } %>
+            <% } %>
+            <% if(isAdmin) { %>
+            <td>
+              <form method="post" action="/removeFindNumberResult">
+                <input type="hidden" name="id" value="<%= leader._id %>">
+                <input type="submit" value="Remove Ranking">
+              </form>
+            </td>
+            <% } %>
+          </tr>
+      
+        <% }) %>
+      </tbody>
+    </table>
+  </p>
+  
+</body>
+
+<%- include('link-to-survey') -%>
+<%- include('bootfooter') -%>

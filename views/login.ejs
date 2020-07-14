@@ -1,57 +1,54 @@
-
-<!--
-
-<div class="jumbotron">
-  <h1>Xolbor Games</h1>
-  <p>~Not Roblox~</p>
-</div>
-<hr>
-
-<h3> Sign In </h3>
-
-Username
-<input type="text" name="username" placeholder="Enter your username"> <br>
-
-Password
-<input type="password" name="password" placeholder="Enter your password"> <br>
-
-
--->
-
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
+    <div class="jumbotron">
+        <h1>Login to the Authentication Demo </h1>
+        <p> You must login to see your profile </p>
+        <a class="btn btn-danger" href="/auth/google">
+            <span class="fa fa-google-plus"> Google</span>
+        </a>
+    </div>
+
     <div class="row">
+      <!--<div class="col-sm-1">
+        
+      </div>-->
         <div class="col-sm-5">
-            <h2>Login</h2>
+          <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Login</h1></u><br><br>
             <form method="post" action="/login">
-                Username: <input type="text"
+              <h4>Username:</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
                                  autocomplete="username"
-                                 name="username"><br>
-                Passphrase: <input  type="password"
+                                 name="username"><br><br><br>
+              <h4>Password:</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  type="password"
                                     autocomplete="passphrase"
-                                    name="passphrase"><br>
-                <input type="submit">
+                                    name="passphrase"><br><br><br>
+                <input type="submit" value="Log-in" style="width: 100px; height: 50px">
             </form>
+          
         </div>
         <div class="col-sm-2" style="text-align:center">
+          <h3</h3><hr style="width: 1px; height: 720px; background: black; border: none;" />
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-4">
           <h5>
             <%= message %>
           </h5>
-            <h2>Signup</h2>
+          <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Signup</h1></u><br><br><br>
             <form method="post" action="/signup">
-                Username: <input type="text" autocomplete="username" name="username"><br>
-                Passphrase (Must Be 8 Or More Characters):
-                   <input type="password" autocomplete="passphrase" name="passphrase"><br>
-                Confirm passphrase:
-                   <input type="password" name="passphrase2"><br>
-                Email: <input type="email" autocomplete="email" name="email"<br><br>
+              <h4>Username:</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" autocomplete="username" name="username"><br><br><br>
+              <h4>Password (Must Be 8 Or More Characters):</h4>
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" autocomplete="passphrase" name="passphrase"><br><br><br>
+              <h4>Confirm password:</h4>
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="passphrase2"><br><br><br>
+              <h4>Email:</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" autocomplete="email" name="email"<br><br><br><br>
                    </select>
-                <input type="submit">
+                <input type="submit" value="Sign-up" style="width: 100px; height: 50px">
             </form>
         </div>
     </div>
+
+
+
+
 
 <%- include('bootfooter') -%>

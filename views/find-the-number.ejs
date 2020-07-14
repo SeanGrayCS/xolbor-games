@@ -1,7 +1,7 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
-<div class="jumbotron" style="background-color:#86d9f0; color:#C30000">
+<div class="jumbotron gradient">
   <h1>
     Find The Number!
   </h1>
@@ -16,74 +16,93 @@
   <hr>
   
   <body>
-  <p><strong id="isCorrect"></strong></p>
-  <p id="yourGuess"></p>
-  <p id="guesses"></p>
+    <div class="row">
+      <div class="col">
+        <p><strong id="isCorrect"></strong></p>
+      </div>
+      <div class="col">
+        <h4 style="text-align:right;">
+          <a href="/findNumberLeaderboard">Leaderboards</a>
+        </h4>
+      </div>
+    </div>
+    <p id="yourGuess"></p>
+    <p id="guesses"></p>
     
-  <hr>
+    <hr>
   
-  <div>
-    Enter your guess.
-  </div>
-  <input type="number" id="guess" min="1" max="1000">
-  <br>
-  <button type="button" onclick="changeGuess()">Submit</button>
-  <br>
-  <br>
-  <button type="button" onclick="resetGame()">Reset The Game</button>
-  <hr>
+    <div>
+      Enter your guess.
+    </div>
+    <input type="number" id="guess" min="1" max="1000">
+    <br>
+    <button type="button" id="btn" onclick="changeGuess()">Submit</button>
+    <br>
+    <br>
+    <button type="button" onclick="resetGame()">Reset The Game</button>
+    <hr>
   
-  <script>
-    var numberGen = (Math.floor(Math.random() * 1000)) + 1;
-    var numberGuess = 0;
-    var numGuesses = 0;
-    document.getElementById("isCorrect").innerHTML = "Game Started!";
-    document.getElementById("yourGuess").innerHTML = "Guess a Number From 1-1000.";
-    document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
+    <script>
+      var input = document.getElementById("guess");
+      input.addEventListener("keyup", (event) => {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("btn").click();
+        }
+      })
+    </script>
     
-    function changeGuess() {
-      numberGuess = document.getElementById("guess").value;
-      if (numberGuess > 1000 || numberGuess < 1) {
-        document.getElementById("isCorrect").innerHTML = "YOUR GUESS MUST BE BETWEEN 1 AND 1000";
-      } else {
-        numGuesses++;
-        document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
-        document.getElementById("yourGuess").innerHTML = "You Guessed: " + numberGuess;
+    <script>
+      var numberGen = (Math.floor(Math.random() * 1000)) + 1;
+      var numberGuess = 0;
+      var numGuesses = 0;
+      document.getElementById("isCorrect").innerHTML = "Game Started!";
+      document.getElementById("yourGuess").innerHTML = "Guess a Number From 1-1000.";
+      document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
+    
+      function changeGuess() {
+        numberGuess = document.getElementById("guess").value;
+        document.getElementById("guess").value = "";
+        if (numberGuess > 1000 || numberGuess < 1) {
+          document.getElementById("isCorrect").innerHTML = "YOUR GUESS MUST BE BETWEEN 1 AND 1000";
+        } else {
+          numGuesses++;
+          document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
+          document.getElementById("yourGuess").innerHTML = "You Guessed: " + numberGuess;
         
-        if (numberGuess == numberGen) {
-          document.getElementById("isCorrect").innerHTML = "The Number Was: " + numberGen + ". You Guessed The Number in " + numGuesses + " Guesses!";
-          /*
-          $.ajax({
-            type: "POST",
-            url: "/logToLeader",
-            data: numGuesses,
-            success: function {
-              console.log("success")
+          if (numberGuess == numberGen) {
+            document.getElementById("isCorrect").innerHTML = "The Number Was: " + numberGen + ". You Guessed The Number in " + numGuesses + " Guesses!";
+            if (<%= loggedIn %>) {
+              var socket = io();
+              var request = 'find number result';
+              var user = '<%= username %>';
+              var date = new Date();
+              var ISODate = date.toISOString();
+              var msg = {user:user, number:numberGen, numGuesses:numGuesses, date:ISODate};
+              socket.emit(request, msg);
             }
-          });
-          */
-        }
+          }
     
-        if (numberGuess > numberGen) {
-          document.getElementById("isCorrect").innerHTML = "The Number is Less Than " + numberGuess;
-        }
+          if (numberGuess > numberGen) {
+            document.getElementById("isCorrect").innerHTML = "The Number is Less Than " + numberGuess;
+          }
       
-        if (numberGuess < numberGen) {
-          document.getElementById("isCorrect").innerHTML = "The Number is Greater Than " + numberGuess;
+          if (numberGuess < numberGen) {
+            document.getElementById("isCorrect").innerHTML = "The Number is Greater Than " + numberGuess;
+          }
         }
       }
-    }
     
-    function resetGame() {
-      numberGen = (Math.floor(Math.random() * 1000)) + 1;
-      numberGuess = 0;
-      numGuesses = 0;
-      document.getElementById("isCorrect").innerHTML = "Game Has Been Reset";
-      document.getElementById("yourGuess").innerHTML = "Guess A Number";
-      document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
-    }
+      function resetGame() {
+        numberGen = (Math.floor(Math.random() * 1000)) + 1;
+        numberGuess = 0;
+        numGuesses = 0;
+        document.getElementById("isCorrect").innerHTML = "Game Has Been Reset";
+        document.getElementById("yourGuess").innerHTML = "Guess A Number";
+        document.getElementById("guesses").innerHTML = "Number of Guesses: " + numGuesses;
+      }
     
-  </script>
+    </script>
 
 </body>
 </div>

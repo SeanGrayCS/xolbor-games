@@ -14,8 +14,8 @@
     <% users.forEach(user => { %>  
     <tr>
       <td><%= user._id %></td> 
-      <td><%= user.username %></td>
-      <td><%= user.email %></td>  
+      <td><%= user.username || user.googlename %></td>
+      <td><%= user.email || user.googleemail %></td>  
       <td><%= user.admin %></td>
     </tr> 
     <% }) %>

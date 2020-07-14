@@ -68,6 +68,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const auth = require('./routes/auth')  // added by TJH
 app.use(auth)
 
+const googleauth = require('./routes/googleAuth')  // added by TJH
+app.use(googleauth)
+
 
 // This is an example of middleware
 // where we look at a request and process it!
@@ -136,6 +139,25 @@ io.on('connection', (socket) => {
     io.emit('chat message', msg);
   });
 });
+
+const FindNumberLeader = require('./models/FindNumberLeader');
+
+io.on('connection', (socket) => {
+  socket.on('find number result', async (msg) => {
+    const date = new Date(msg.date);
+    const numberLeader = new FindNumberLeader({username:msg.user, number:msg.number, numGuesses:msg.numGuesses, date:msg.date})
+    await numberLeader.save();
+  })
+})
+
+app.get("/findNumberLeaderboard", async (req, res, next) => {
+  try {
+    res.locals.leaders = await FindNumberLeader.find({}).sort({numGuesses:-1});
+    res.render("find-the-number-leaderboard");
+  } catch (e) {
+    next(e);
+  }
+})
 
 const SurveyData = require('./models/SurveyData');
 
@@ -229,6 +251,24 @@ app.post("/submitQuiz", async (req, res, next) => {
   }
 })
 
+app.post('/removeFindNumberResult', async (req, res, next) => {
+  try {
+    await FindNumberLeader.remove({_id:req.body.id})
+    res.redirect('/findNumberLeaderboard')
+  } catch(e) {
+    next(e)
+  }
+})
+
+app.post('/removeQuizResult', async (req, res, next) => {
+  try {
+    await QuizSubmission.remove({_id:req.body.id})
+    res.redirect('/quiz-results')
+  } catch(e) {
+    next(e)
+  }
+})
+
 app.get('/startGame', (req, res) => {
   res.render("startGame")
 })
@@ -300,6 +340,50 @@ app.post('/removeUser', async (req, res, next) => {
       await User.remove({_id:req.body.id})
     }
     res.redirect('/admin')
+  } catch(e) {
+    next(e)
+  }
+})
+
+app.get('/adminApplication',
+       async (req ,res, next) => {
+  try{
+    res.locals.users = await User.find()
+    res.render('adminApplication')
+  } catch(error){
+    next(error)
+  }
+})
+
+const AdminApplicationData = require('./models/AdminApplicationData');
+
+app.post("/saveAdminApplication", async (req, res, next) => {
+  try {
+    var dt = new Date()
+    req.body.date = dt.toISOString();
+    req.body.username = res.locals.username || "Guest";
+    const {age, experience, offer, want, rate, trait, change, responsibilities, date, username} = req.body;
+    const application = new AdminApplicationData({username, age, experience, offer, want, rate, trait, change, responsibilities, date}); //How do I add username and date to this?
+    await application.save();
+    res.redirect("/");
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.get("/showAdminApplicationData", async (req, res, next) => {
+  try {
+    res.locals.applications = await AdminApplicationData.find().sort({date:-1})
+    res.render("showAdminApplicationData");
+  } catch (e) {
+    next(e);
+  }    
+})
+
+app.post('/removeApplication', async (req, res, next) => {
+  try {
+    await AdminApplicationData.remove({_id:req.body.id})
+    res.redirect('/showAdminApplicationData')
   } catch(e) {
     next(e)
   }

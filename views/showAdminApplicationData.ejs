@@ -1,0 +1,74 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<% if (loggedIn && isAdmin) { %>
+
+<body>
+  <h1>
+    Admin Application Data: 
+  </h1>
+  
+  <p>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>Username</th>
+        <th>Age</th>
+        <th>How has your expererience been while playing on Xolber?</th>
+        <th>What would you offer as an Admin?</th>
+        <th>Why do you want to be an Admin?</th>
+        <th>What would you rate Xolbor from 0-10?</th>
+        <th>In your opinion, what is the most important trait of an Admin? </th>
+        <th>How would you change the website for the better? </th>
+        <th>Do you have any previous responsibilities similar to this (not needed)? Elaborate if yes.</th>
+        <th>Date</th>
+        <th>Removal</th>
+      </thead>
+      <tbody>
+        <% applications.forEach(application => { %>
+        
+        <tr>
+          <td> <%= application.username %> </td>
+          <td> <%= application.age %> </td>
+          <td> <%= application.experience %> </td>
+          <td> <%= application.offer %> </td>
+          <td> <%= application.want %> </td>
+          <td> <%= application.rate %> </td>
+          <td> <%= application.trait %> </td>
+          <td> <%= application.change %> </td>
+          <td> <%= application.responsibilities %> </td>
+          <% var date = new Date(application.date) %>
+          <% if (date.getMinutes() < 10) { %>
+            <% if (date.getHours() > 12) { %>
+              <td> <%= date.getMonth() %>/<%= date.getDate() %>/<%= date.getFullYear() %> <%= date.getHours() - 12 %>:0<%= date.getMinutes() %>pm</td>
+            <% } else { %>
+              <td> <%= date.getMonth() %>/<%= date.getDate() %>/<%= date.getFullYear() %> <%= date.getHours() %>:0<%= date.getMinutes() %>am</td>
+            <% } %>
+          <% } else { %>
+            <% if (date.getHours() > 12) { %>
+              <td> <%= date.getMonth() %>/<%= date.getDate() %>/<%= date.getFullYear() %> <%= date.getHours() - 12 %>:<%= date.getMinutes() %>pm</td>
+            <% } else { %>
+              <td> <%= date.getMonth() %>/<%= date.getDate() %>/<%= date.getFullYear() %> <%= date.getHours() %>:<%= date.getMinutes() %>am</td>
+            <% } %>
+          <% } %>
+          <td>
+            <form method="post" action="/removeApplication">
+              <input type="hidden" name="id" value="<%= application._id %>">
+              <input type="submit" value="Remove Application">
+            </form>
+          </td>
+        </tr>
+      
+        <% }) %>
+      </tbody>
+    </table>
+  </p>
+  
+</body>
+
+<% } else { %>
+
+<a href="/">You must be an admin to use this page.</a>
+
+<% } %>
+
+<%- include('bootfooter') -%>

@@ -1,6 +1,7 @@
 dependencies:
   axios: 0.19.2
   connect-flash: 0.1.1
+  connect-mongo: 3.2.0
   cookie-parser: 1.4.5
   debug: 2.6.9
   ejs: 2.6.2
@@ -9,6 +10,8 @@ dependencies:
   http-errors: 1.6.3
   mongoose: 5.9.22
   nodemon: 1.19.4
+  passport: 0.4.1
+  passport-google-oauth: 2.0.0
   socket.io: 2.3.0
 packages:
   /abbrev/1.1.1:
@@ -148,6 +151,12 @@ packages:
       node: ^4.5.0 || >= 5.9
     resolution:
       integrity: sha512-lGe34o6EHj9y3Kts9R4ZYs/Gr+6N7MCaMlIFA3F1R2O5/m7K06AxfSeO5530PEERE6/WyEg3lsuyw4GHlPZHog==
+  /base64url/3.0.1:
+    dev: false
+    engines:
+      node: '>=6.0.0'
+    resolution:
+      integrity: sha512-ir1UPr3dkwexU7FdV8qBBbNDRUhMmIekYMFZfi+C/sLNnRESKPl23nB9b2pltqfOQNnGzsDdId90AEtG5tCx4A==
   /better-assert/1.0.2:
     dependencies:
       callsite: 1.0.0
@@ -389,6 +398,12 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha1-2GMPJtlaf4UfmVax6MxnMvO2qjA=
+  /connect-mongo/3.2.0:
+    dependencies:
+      mongodb: 3.5.9
+    dev: false
+    resolution:
+      integrity: sha512-0Mx88079Z20CG909wCFlR3UxhMYGg6Ibn1hkIje1hwsqOLWtL9HJV+XD0DAjUvQScK6WqY/FA8tSVQM9rR64Rw==
   /content-disposition/0.5.2:
     dev: false
     engines:
@@ -1474,6 +1489,10 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-NakjLfo11wZ7TLLd8jV7GHFTbF8=
+  /oauth/0.9.15:
+    dev: false
+    resolution:
+      integrity: sha1-vR/vr2hslrdUda7VGWQS/2DPucE=
   /object-component/0.0.3:
     dev: false
     resolution:
@@ -1559,6 +1578,66 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
+  /passport-google-oauth/2.0.0:
+    dependencies:
+      passport-google-oauth1: 1.0.0
+      passport-google-oauth20: 2.0.0
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha512-JKxZpBx6wBQXX1/a1s7VmdBgwOugohH+IxCy84aPTZNq/iIPX6u7Mqov1zY7MKRz3niFPol0KJz8zPLBoHKtYA==
+  /passport-google-oauth1/1.0.0:
+    dependencies:
+      passport-oauth1: 1.1.0
+    dev: false
+    resolution:
+      integrity: sha1-r3SoA99R7GRvZqRNgigr5vEI4Mw=
+  /passport-google-oauth20/2.0.0:
+    dependencies:
+      passport-oauth2: 1.5.0
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha512-KSk6IJ15RoxuGq7D1UKK/8qKhNfzbLeLrG3gkLZ7p4A6DBCcv7xpyQwuXtWdpyR0+E0mwkpjY1VfPOhxQrKzdQ==
+  /passport-oauth1/1.1.0:
+    dependencies:
+      oauth: 0.9.15
+      passport-strategy: 1.0.0
+      utils-merge: 1.0.1
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha1-p96YiiEfnPRoc3cTDqdN8ycwyRg=
+  /passport-oauth2/1.5.0:
+    dependencies:
+      base64url: 3.0.1
+      oauth: 0.9.15
+      passport-strategy: 1.0.0
+      uid2: 0.0.3
+      utils-merge: 1.0.1
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha512-kqBt6vR/5VlCK8iCx1/KpY42kQ+NEHZwsSyt4Y6STiNjU+wWICG1i8ucc1FapXDGO15C5O5VZz7+7vRzrDPXXQ==
+  /passport-strategy/1.0.0:
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha1-tVOaqPwiWj0a0XlHbd8ja0QPUuQ=
+  /passport/0.4.1:
+    dependencies:
+      passport-strategy: 1.0.0
+      pause: 0.0.1
+    dev: false
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha512-IxXgZZs8d7uFSt3eqNjM9NQ3g3uQCW5avD8mRNoXV99Yig50vjuaez6dQK2qC0kVWPRTujxY0dWgGfT09adjYg==
   /path-dirname/1.0.2:
     dev: false
     resolution:
@@ -1583,6 +1662,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
+  /pause/0.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-HUCLP9t2kjuVQ9lvtMnf1TXZy10=
   /pify/3.0.0:
     dev: false
     engines:
@@ -2119,6 +2202,10 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-KPHm4VL5dDXKz01UuEd88Df+KzynaohSL9fBh096KWAxSKZQDI2uBrVqtvRM4rwrIrRRKsdLNML/lnaaVSRioA==
+  /uid2/0.0.3:
+    dev: false
+    resolution:
+      integrity: sha1-SDEm4Rd03y9xuLY53NeZw3YWK4I=
   /undefsafe/2.0.3:
     dependencies:
       debug: 2.6.9
@@ -2287,6 +2374,7 @@ shrinkwrapVersion: 3
 specifiers:
   axios: ^0.19.0
   connect-flash: ^0.1.1
+  connect-mongo: ^3.2.0
   cookie-parser: ~1.4.4
   debug: ~2.6.9
   ejs: ~2.6.1
@@ -2295,4 +2383,6 @@ specifiers:
   http-errors: ~1.6.3
   mongoose: ^5.9.21
   nodemon: ^1.19.1
+  passport: ^0.4.1
+  passport-google-oauth: ^2.0.0
   socket.io: ^2.3.0
