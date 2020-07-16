@@ -1,0 +1,30 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<h1>
+  Join a game
+</h1>
+Enter the gamePIN and press the button below to play a game:
+<form method="post" action="/joinGame" id="join">
+  <input type="hidden" id="user" autocomplete="off" value="<%= username %>" />
+  gamePIN: <input type="text" name="gamePIN" id="gamePIN"><br>
+  <input type="submit">
+</form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'join lobby';
+    document.getElementById("join").addEventListener("submit", function (e) {
+      console.log("client send")
+      let gamePIN = document.getElementById("gamePIN").value
+      let user = document.getElementById("user").value || "Guest"
+      let userId = "<%= user._id %>"
+      var msg = {user:user, userId:userId, gamePIN:gamePIN};
+      socket.emit(request, msg);
+      return false;
+    });
+  })
+</script>
+
+<%- include('bootfooter') -%>

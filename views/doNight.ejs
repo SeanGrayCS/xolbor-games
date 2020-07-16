@@ -1,0 +1,215 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<% if (isDead) { %>
+<h1>
+  You are dead.
+</h1>
+<% } else { %>
+<br>
+<% if (playerIds[mafia] == user._id) { %>
+<!-- Mafia -->
+<h1>
+  You are the mafia.
+</h1>
+<div id="page">
+<h3>
+  Select who you are going to kill tonight!
+</h3>
+<form id="moves">
+  <select id="move">
+    <% players.forEach(player => { %>
+    <option><%= player %></option>
+    <% }) %>
+  </select>
+  <input type="submit" value="Submit">
+</form>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'submit moves';
+    document.getElementById("moves").addEventListener("submit", (e) => {
+      e.preventDefault();
+      let gamePIN = <%= gamePIN %>;
+      let role = "mafia";
+      let target = document.getElementById("move").value;
+      let msg = {gamePIN:gamePIN, role:role, target:target};
+      socket.emit(request, msg);
+      document.getElementById("page").innerHTML = "";
+      return false;
+    })
+  })
+</script>
+
+<% } else if (playerIds[detective] == user._id) { %>
+<!-- Detective -->
+<h1>
+  You are the detective.
+</h1>
+<div id="page">
+  <h3>
+    Select who you are going to investigate tonight!
+  </h3>
+  <form id="moves">
+    <select id="move">
+      <% players.forEach(player => { %>
+      <option><%= player %></option>
+      <% }) %>
+    </select>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+  
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'submit moves';
+    document.getElementById("moves").addEventListener("submit", (e) => {
+      e.preventDefault();
+      let gamePIN = <%= gamePIN %>;
+      let role = "detective";
+      let target = document.getElementById("move").value;
+      let msg = {gamePIN:gamePIN, role:role, target:target};
+      socket.emit(request, msg);
+      document.getElementById("page").innerHTML = "";
+      return false;
+    })
+  })
+</script>
+
+<% } else if (playerIds[healer] == user._id) { %>
+<!-- Healer -->
+<h1>
+  You are the healer.
+</h1>
+<div id="page">
+<h3>
+  Select who you are going to save tonight!
+</h3>
+<form id="moves">
+  <select id="move">
+    <% players.forEach(player => { %>
+    <option><%= player %></option>
+    <% }) %>
+  </select>
+  <input type="submit" value="Submit">
+</form>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'submit moves';
+    document.getElementById("moves").addEventListener("submit", (e) => {
+      e.preventDefault();
+      let gamePIN = <%= gamePIN %>;
+      let role = "healer";
+      let target = document.getElementById("move").value;
+      let msg = {gamePIN:gamePIN, role:role, target:target};
+      socket.emit(request, msg);
+      document.getElementById("page").innerHTML = "";
+      return false;
+    })
+  })
+</script>
+
+<% } else { %>
+<!-- Villager -->
+<h1>
+  You are a villager.
+</h1>
+<div id="page">
+<h3>
+  Press Submit to register that you are here.
+</h3>
+<form id="moves">
+  <input type="submit" value="Submit">
+</form>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'submit moves';
+    document.getElementById("moves").addEventListener("submit", (e) => {
+      e.preventDefault();
+      let gamePIN = <%= gamePIN %>;
+      let role = "villager";
+      let target = document.getElementById("move").value;
+      let msg = {gamePIN:gamePIN, role:role, target:target};
+      socket.emit(request, msg);
+      document.getElementById("page").innerHTML = "";
+      return false;
+    })
+  })
+</script>
+
+<% } %>
+<% } %>
+
+<br>
+<hr>
+<div id="playersLeft">
+  <h2>
+    <%= players.length %> Players Need to Submit Moves
+  </h2>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'submit moves';
+    var numSubmitted = 0;
+    socket.on(request, (msg) => {
+      if (msg.gamePIN == <%= gamePIN %>) {
+        console.log("client recieve");
+        var id = "<%= user._id %>"
+        numSubmitted++;
+        var playersLeft = <%= players.length %> - <%= dead.length %> - numSubmitted;
+        document.getElementById("playersLeft").innerHTML = '<h2>' + playersLeft + ' Players Need to Submit Moves</h2>';
+        if (playersLeft == 0) {
+          window.location.href = "/doTurn/" + <%= gamePIN %>;
+        }
+      }
+    })
+    socket.on('redirect', (msg) => {
+      if (msg.gamePIN == <%= gamePIN %>) {
+        window.location.href = msg.destination;
+      }
+    })
+  })
+</script>
+
+<% if (isHost) { %>
+<hr>
+<button id="next">Finish the night</button>
+<hr>
+<button id="end">End the game</button>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'redirect';
+    document.getElementById("next").addEventListener("click", (e) => {
+      e.preventDefault();
+      let gamePIN = <%= gamePIN %>;
+      let destination = "/doTurn/" + gamePIN
+      let msg = {gamePIN:gamePIN, destination:destination};
+      socket.emit(request, msg);
+      return false;
+    })
+    document.getElementById("end").addEventListener("click", (e) => {
+      e.preventDefault();
+      let gamePIN = <%= gamePIN %>;
+      let destination = "/endGame/" + gamePIN
+      let msg = {gamePIN:gamePIN, destination:destination};
+      socket.emit(request, msg);
+      return false;
+    })
+  })
+</script>
+<% } %>
+
+<%- include('bootfooter') -%>

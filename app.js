@@ -71,6 +71,8 @@ app.use(auth)
 const googleauth = require('./routes/googleAuth')  // added by TJH
 app.use(googleauth)
 
+const games = require('./routes/games')
+app.use(games)
 
 // This is an example of middleware
 // where we look at a request and process it!
@@ -90,16 +92,16 @@ app.get("/games", (req, res, next) => {
   res.render("games")
 })
 
+app.get("/createGame", (req, res, next) => {
+  res.render("createGame")
+})
+
 app.get("/find-the-number", (req, res) => {
   res.render("find-the-number");
 });
 
 app.get("/mafia", async (req, res, next) => {
   try {
-    var tenMinAgo = new Date();
-    tenMinAgo.setTime(tenMinAgo.getTime() - 600000);
-    var mili = tenMinAgo.getTime();
-    res.locals.chats = await ChatMessage.find({room:"mafia", recipientType:"Everyone", dateMili:{$gte:mili}}, {_id:0}).sort({date:-1}); 
     res.render("mafia")
   } catch (e) {
     next(e);
@@ -273,13 +275,40 @@ app.get('/startGame', (req, res) => {
   res.render("startGame")
 })
 
-let games = []
-app.post('/createGame', (req, res) => {
-  const gameInfo = req.body
-  games = games.concat(gameInfo)
-  res.locals.games = games
-  res.render('showGames')
+app.get('/xolcraft', (req, res) => {
+  res.render("xolcraft")
 })
+
+app.get("/about-us", (req, res, next) => {
+  res.render("about-us")
+})
+
+app.get("/testing", (req, res, next) => {
+  res.render("testing")
+})
+
+const GameAnswer = require('./models/GameAnswer')
+const GameState = require('./models/GameState')
+
+io.on('connection', (socket) => {
+  socket.on('join lobby', async (msg) => {
+    const game = await GameState.findOne({gamePIN:msg.gamePIN})
+    if (game.status == 'start') {
+      const players = game.players.concat(msg.user);
+      const playerIds = game.playerIds.concat(msg.userId)
+      await GameState.update({gamePIN:msg.gamePIN}, {players:players, playerIds:playerIds})
+    }
+    io.emit('join lobby', msg);
+  });
+  socket.on('redirect', (msg) => {
+    io.emit('redirect', msg);
+  });
+  socket.on('submit moves', async (msg) => {
+    const gameAnswer = new GameAnswer({gamePIN:msg.gamePIN, role:msg.role, target:msg.target})
+    await gameAnswer.save();
+    io.emit('submit moves', msg);
+  })
+});
 
 const User = require('./models/User')
 
@@ -386,6 +415,57 @@ app.post('/removeApplication', async (req, res, next) => {
     res.redirect('/showAdminApplicationData')
   } catch(e) {
     next(e)
+  }
+})
+
+
+app.get("/doTurn/:gamePIN", async (req, res, next) => {
+  try {
+    var tenMinAgo = new Date();
+    tenMinAgo.setTime(tenMinAgo.getTime() - 600000);
+    var mili = tenMinAgo.getTime();
+    res.locals.chats = await ChatMessage.find({room:"mafia", recipientType:"Everyone", dateMili:{$gte:mili}}, {_id:0}).sort({date:-1}); 
+    const gamePIN = req.params.gamePIN
+    res.locals.gamePIN = gamePIN
+    const gameState = await GameState.findOne({gamePIN:gamePIN})
+    const answers = await GameAnswer.find({gamePIN:gamePIN}, {_id:0})
+    var mafiaTarget = ""
+    var detectiveTarget = ""
+    var healerTarget = ""
+    for (var i = 0; i < answers.length; i++) {
+      if (answers[i].role == "mafia") {
+        mafiaTarget = answers[i].target;
+      }
+      if (answers[i].role == "detective") {
+        detectiveTarget = answers[i].target;
+      }
+      if (answers[i].role == "healer") {
+        healerTarget = answers[i].target;
+      }
+    }
+    if (mafiaTarget != healerTarget) {
+      const dead = gameState.dead.concat(mafiaTarget)
+      await GameState.update({gamePIN:gamePIN}, {dead:dead})
+    }
+    res.locals.mafiaTarget = mafiaTarget;
+    res.locals.detectiveTarget = detectiveTarget;
+    res.locals.healerTarget = healerTarget;
+    res.locals.mafia = gameState.mafia;
+    res.locals.detective = gameState.detective;
+    res.locals.healer = gameState.healer;
+    res.locals.players = gameState.players
+    res.locals.dead = gameState.dead;
+    var isDead = false
+    for (var i = 0; i < gameState.dead.length; i++) {
+      if (gameState.dead[i] == res.locals.user.username) {
+        isDead = true
+      }
+    }
+    res.locals.isDead = isDead
+    res.locals.isHost = (gameState.owner == res.locals.user._id)
+    res.render("doTurn")
+  } catch (e) {
+    next(e);
   }
 })
 

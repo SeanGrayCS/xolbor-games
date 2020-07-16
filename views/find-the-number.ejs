@@ -31,16 +31,18 @@
     
     <hr>
   
-    <div>
-      Enter your guess.
-    </div>
-    <input type="number" id="guess" min="1" max="1000">
-    <br>
-    <button type="button" id="btn" onclick="changeGuess()">Submit</button>
+    <div> <h4>
+      Enter your guess here: </h4>
+    </div> <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" id="guess" min="1" max="1000">
     <br>
     <br>
-    <button type="button" onclick="resetGame()">Reset The Game</button>
-    <hr>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="btn" style="width: 100px; height: 50px" onclick="changeGuess()">Submit Guess!</button>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="resetGame()">Reset The Game</button>
+    <br>
+    <br>
   
     <script>
       var input = document.getElementById("guess");

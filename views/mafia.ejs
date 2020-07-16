@@ -1,6 +1,7 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
+<% if (isAdmin) { %>
 <div class="jumbotron gradient">
   <h1>
     Mafia
@@ -34,29 +35,25 @@
 </div>
 
 <body>
-  <div class="row">
-    <div class="col">
-      
-    </div>
-    <div class="col">
-      <h3>
-        Chat:
-      </h3>
-      
-      <!-- Implement chatbox -->
-      <script>
-        var room = "mafia";
-      </script>
-      <%- include('chatbox') -%>
-      <script>
-        document.getElementById("extraInputs").innerHTML = '<select id="recipientType" name="recipientType"><option>Everyone</option><option>One Person</option></select><br>Username of Recipient (One Person): <input type="text" id="recipient" name="recipient">';
-      </script>
-      
-    </div>
-  </div>
+  Press the button below to host a game of mafia:
+  <form method="post" action="/startGame">
+    <input type="submit" value="Start Game">
+  </form>
+  <br>
+  <hr>
+  Or press this button to join a game that someone else is hosting:
+  <form method="post" action="/playGame">
+    <input type="submit" value="Join Game">
+  </form>
 </body>
 
 <hr>
+<% } else { %>
+<h1>
+  Sorry. This game is still under construction. It will be done soon!
+</h1>
+<hr>
+<% } %>
 
 <%- include('link-to-survey') -%>
 <%- include('bootfooter') -%>
