@@ -2,12 +2,16 @@
 const mongoose = require( 'mongoose' );
 const Schema = mongoose.Schema;
 
-var schema = Schema( {
+var gameSchema = Schema( {
   gamePIN: String,
   status: String,
-  state: String,
-  stage: Number
+  owner: Schema.Types.ObjectId,
+  players: [],
+  playerIds: [],
+  dead: [],
+  mafia: Number,
+  detective: Number,
+  healer: Number
 } );
 
-module.exports = mongoose.model( 'GameStateTeam2', schema );
-
+module.exports = mongoose.model( 'GameStateMafia', gameSchema );

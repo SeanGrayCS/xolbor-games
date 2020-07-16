@@ -1,0 +1,66 @@
+<%- include('bootheader') -%>
+
+<h4>
+  <% if (healerTarget == mafiaTarget) { %>
+  The mafia killed <%= mafiaTarget %>, but the healer saved them.
+  <% } else { %>
+  The mafia killed <%= mafiaTarget %>.
+  <% if (mafiaTarget == players[detective]) { %>
+   They were the detective. The detective is dead.
+  <% } %>
+  <br>
+  The healer went to save <%= healerTarget %>.
+  <br>
+  <% } %>
+  <% if ((detectiveTarget == players[mafia]) && (mafiaTarget != players[detective])) { %>
+  The detective investigated <%= detectiveTarget %> and found them to be the mafia! Game over! Mafia Loses!
+  <% } else if (mafiaTarget != players[detective]) { %>
+  The detective investigated <%= detectiveTarget %> and found them to be innocent.
+  <% } %>
+</h4>
+
+<% if (!isDead) { %>
+<body>
+  <h3>
+    Discuss With Each Other:
+  </h3>
+  <br>
+  
+  <!-- Implement chatbox -->
+  <script>
+    var room = "mafia"
+  </script>
+  <%- include('chatbox') -%>
+  
+</body>
+<% } %>
+
+<% if (isHost) { %>
+<button id="next">Go to the next night.</button>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    document.getElementById("next").addEventListener("click", (e) => {
+      e.preventDefault();
+      let gamePIN = <%= gamePIN %>;
+      let destination = "/endGame/" + gamePIN
+      let msg = {gamePIN:gamePIN, destination:destination};
+      socket.emit('redirect', msg);
+      return false;
+    })
+  })
+</script>
+<% } %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    socket.on('redirect', (msg) => {
+      if (msg.gamePIN == <%= gamePIN %>) {
+        window.location.href = msg.destination;
+      }
+    })
+  })
+</script>
+
+<%- include('bootfooter') -%>

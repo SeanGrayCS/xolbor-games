@@ -6,6 +6,8 @@
 body {
   padding: 60px;
   font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("https://cdn.glitch.com/323104cc-8422-4df6-b528-2e7418a754c3%2F0cshCu.jpg?v=1594836864900");
+  background-repeat: repeat;
 }
 
 h1 {
@@ -83,7 +85,32 @@ strong {
 }
 
 .quizGradient {
-  background: linear-gradient(to bottom, #4988fc 30%, #faa720 43%, #faa720 55%, #00d652 70%, #46ebe0 85%);
+  background: linear-gradient(to bottom, #4988fc 5%, #00d652 27%, #faa720 45%, #ff4719 69%, #46ebe0 90%);
   padding: 20px 30px 20px 30px;
   border-radius: 15px;
 }
+
+img {  display: block; } 
+
+img.wrap {  max-width: 70%;  margin: 0px 0px; }  
+
+img.align-right {  float: right;  margin-left: 30px; }  
+
+img.align-left {  float: left;  margin-right: 30px; } 
+
+.fancy {
+  color: #ff0000;
+  border: none;
+  text-align: center;
+  font-size: 27px;
+  margin: 4px 2px;
+  opacity: 0.9;
+  transition: 0.6s;
+}
+.fancy:hover {font-size: 34px; opacity: 1; color: #ff0000}
+
+.fancyImage {
+  opacity: 1;
+  transition: 0.2s;
+}
+.fancyImage:hover {opacity: .85; transform: rotate(15deg)}

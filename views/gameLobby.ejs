@@ -1,0 +1,92 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+
+<h1>
+  GamePIN is <%= gamePIN %>
+</h1>
+<h4>
+  Tell other players to go to https://xolbor-gamez.glitch.me/playgame and enter the GamePIN
+  <br>
+</h4>
+<!-- add a form to send a private message to a username -->
+<hr>
+
+<h5>
+  <table id="players" class="table table-bordered table-striped bg-danger text-light">
+    <thead>
+    <th>Player</th>
+      <% if(isHost) { %>
+      <th>Kick</th>
+      <% } %>
+    </thead>
+    <tbody>
+    <% state.players.forEach(player => { %>
+    <tr>
+      <td><%= player %></td>
+      <% if(isHost) { %>
+      <td>
+        <form method="post" action="/kickPlayer">
+          <input type="hidden" name="id" value="<%= player._id %>">
+          <input type="hidden" name="gamePIN" value="<%= gamePIN %>">
+          <input type="submit" value="Kick Player">
+        </form>
+      </td>
+      <% } %>
+    </tr>
+    <% }) %>
+    </tbody>
+  </table>
+  You need at least 3 people for a game of mafia, however 5 or more is recommended.
+</h5>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'join lobby';
+    socket.on(request, (msg) => {
+      console.log("client recieve")
+      if (msg.gamePIN == <%= gamePIN %>) {
+        document.getElementById("players").innerHTML += '<li>' + msg.user + '</li>';
+      }
+    })
+    socket.on('redirect', (msg) => {
+      if (msg.gamePIN == <%= gamePIN %>) {
+        window.location.href = msg.destination;
+      }
+    })
+  })
+</script>
+
+<hr>
+<% if (isHost) { %>
+<button id="begin">Begin the game</button>
+<br>
+<hr>
+<button id="end">End the game</button>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    var socket = io();
+    var request = 'redirect';
+    document.getElementById("begin").addEventListener("click", (e) => {
+      e.preventDefault();
+      let gamePIN = <%= gamePIN %>;
+      let destination = "/playingGame/" + gamePIN
+      let msg = {gamePIN:gamePIN, destination:destination};
+      socket.emit(request, msg);
+      return false;
+    })
+    document.getElementById("end").addEventListener("click", (e) => {
+      e.preventDefault();
+      let gamePIN = <%= gamePIN %>;
+      let destination = "/endGame/" + gamePIN
+      let msg = {gamePIN:gamePIN, destination:destination};
+      socket.emit(request, msg);
+      return false;
+    })
+  })
+</script>
+<% } %>
+
+
+<%- include('bootfooter') -%>

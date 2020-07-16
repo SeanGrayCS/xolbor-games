@@ -1,13 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(255, 255, 255, .01)">
+<nav class="navbar navbar-expand-lg navbar-light bg-light menuBarGradient">
   <a class="navbar-brand" href="/"><img src="https://cdn.glitch.com/323104cc-8422-4df6-b528-2e7418a754c3%2Fthumbnails%2FXolbor%20logo.png?1594674780632" width="100%" alt="Logo"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <h3>
       <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+          <a class="nav-link fancy" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
         
+        <!--
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle fancy" data-toggle="dropdown" href="/games" role="button" aria-haspopup="true" aria-expanded="false">Games</a>
           <div class="dropdown-menu">
@@ -22,11 +26,28 @@
             
             <a class="dropdown-item fancy" href="/quiz">Quiz</a>
             
-            <a class="dropdown-item fancy" href="/xolcraft">Xolcraft</a>
+            <a class="dropdown-item fancy" href="/minecraft">Minecraft</a>
             
           </div>
         </li>
-
+        -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fancy" data-toggle="dropdown" href="/games" role="button" aria-haspopup="true" aria-expanded="false">Games</a>
+          <div class="dropdown-menu">
+            
+            <a class="dropdown-item fancy" href="/games">Game List</a>
+            
+            <div class="dropdown-divider"></div>
+            
+            <a class="dropdown-item" href="/find-the-number">Find The Number</a>
+            
+            <a class="dropdown-item" href="/mafia">Mafia</a>
+            
+            <a class="dropdown-item" href="/quiz">Quiz</a>
+            
+          </div>
+        </li>
+        
         <li class="nav-item">
           <a class="nav-link fancy" href="/forum">Forum</a>
         </li>
@@ -59,7 +80,6 @@
               <a class="dropdown-item fancy" href="/showAdminApplicationData">Admin Application Data</a>
            </div>
         </li> 
-  
         <% } %>
       
         <% if (!loggedIn) {%>
@@ -76,7 +96,7 @@
                                 name="username"
                                 size="11"> </small>
             <br>
-               <small> Passphrase: <input type="password"
+               <small> Password: <input type="password"
                                   autocomplete="passphrase"
                                   name="passphrase"
                                   size="10"> </small>
@@ -98,6 +118,8 @@
         <% } %>
       
       </ul>
-    </h3>
   </div>
 </nav>
+
+<%- include('link-to-survey') -%>
+<%- include('bootfooter') -%>
