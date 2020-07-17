@@ -1,7 +1,9 @@
 # **Project Team Roles:**
+#### CO-PRESIDENTS -
+- Sean Gray, Steven Le
 #### SUBJECT MATTER EXPERT (SME) - 
 - JavaScript: Sean Gray  
-#### PROJECT MANAGER (PM) -
+#### PROJECT MANAGERS (PM) -
 - Sean Gray, Steven Le  
 #### TECHNICAL LEAD - 
 - Sean Gray  
