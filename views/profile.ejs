@@ -1,7 +1,7 @@
 <%- include('bootheader') -%>
 <%- include('menubar') -%>
 
-<% if(user === null) { %>
+<% if(usern === null) { %>
 <!-- /profile page -->
 
 <div class="jumbotron gradient row">
@@ -35,31 +35,7 @@
 <h5>
 Username: <%= username %> <br>
 Email: <%= email %> <br>
-Phone Number:  <br>
-Address:  <br>
-  
-<!-- I want to make it so that if there is no email when they made an account, that they can put in their email, But I can't figure it out. Someone help?
-     I've set it up so that email is necessary for account creation, so we don't need to do this - if you have an account that doesn't have an email, put it the username and email here and I'll do it manually. - Sean
 
-<@% if <@%= email %> === null { %>
-
-<form method="post" action="/signup">
-
-  Email: <input type="email" autocomplete="email" name="email"<br><br>
-
-  Phone Number: <input type="tel" autpcomplete ="tel" name="Phone Number"><br>
-
-  Address: <input type="text" autocomplete = "address" name="Address"><br>
-
-  <input type="submit">
-</form>
-<@% } %>
--->
-  
-Profile Picture: <!-- You guys wanna add profile pictures? if we do, then make 2 collumns and profile picture on right column 
-                      Hold off on actually setting up profile pictures, it could be quite difficult, and will require doing stuff I don't know how to do yet - Sean -->
-
-  
 </h5>
 
 <hr>
@@ -69,6 +45,7 @@ Profile Picture: <!-- You guys wanna add profile pictures? if we do, then make 2
 </h2>
 
 <select name="gamenames">
+  <option>Find the Number</option>
   <option>Quiz</option>
 </select>
 Rank: <!-- I can't figure out how to get their rankings for the Quiz game. I am trying to use <.%= count++ %> just like in the leaderboards, but it is not working? 
@@ -77,9 +54,9 @@ Rank: <!-- I can't figure out how to get their rankings for the Quiz game. I am 
 <% } else { %>
 <!-- /profile/username page -->
 
-<div class="jumbotron">
+<div class="jumbotron gradient">
   <h1>
-    User Profile - <%= user.username %>
+    User Profile - <%= usern.username %>
   </h1>
   <br>
 </div>
@@ -87,12 +64,12 @@ Rank: <!-- I can't figure out how to get their rankings for the Quiz game. I am 
 <body>
   <h4>
     Username: 
-    <%= user.username %>
+    <%= usern.username %>
     <br>
   </h4>
   <hr>
   <h2>
-    <%= user.username %>'s Rankings (in games that have rankings):
+    <%= usern.username %>'s Rankings (in games that have rankings):
   </h2>
   <select name="gamenames">
     <option>Quiz</option>

@@ -93,26 +93,19 @@ router.get('/playingGame/:gamePIN', loggedIn, async (req, res, next) => {
     var mafia = 0;
     var detective = 0;
     var healer = 0;
-    if (len > -1) {
-      mafia = Math.floor(Math.random() * len);
-      len--;
+    mafia = Math.floor(Math.random() * len);
+    len--;
+    detective = Math.floor(Math.random() * len);
+    if (detective == mafia) {
+      detective = len + 1;
     }
-    if (len > 0) {
-      detective = Math.floor(Math.random() * len);
-      if (detective == mafia) {
-        detective = len + 1;
-      }
-      len--;
+    len--;
+    healer = Math.floor(Math.random() * len);
+    if (healer == detective || healer == mafia) {
+      healer = len + 2;
     }
-    if (len > 1) {
-      healer = Math.floor(Math.random() * len);
-      if (healer == detective || healer == mafia) {
-        healer = len + 2;
-        if (healer == detective || healer == mafia) {
-          healer = len + 1;
-        }
-      }
-      len--;
+    if (healer == detective || healer == mafia) {
+      healer = len + 1;
     }
     await GameState.update({gamePIN:gamePIN}, {mafia:mafia, detective:detective, healer:healer})
     res.redirect("/doNight/" + gamePIN)
@@ -132,6 +125,7 @@ router.get("/doNight/:gamePIN", loggedIn, async (req, res, next) => {
     res.locals.mafia = gameState.mafia;
     res.locals.detective = gameState.detective;
     res.locals.healer = gameState.healer;
+    res.locals.dead = gameState.dead;
     var isDead = false
     for (var i = 0; i < gameState.dead.length; i++) {
       if (gameState.dead[i] == res.locals.user.username) {

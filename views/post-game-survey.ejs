@@ -19,7 +19,7 @@ Go here to accept the invite: https://github.com/SeanGrayCS/xolbor-games/invitat
 <form method="post" action="/saveformdata">
   
   What game did you play?
-  <select name="game">
+  <select class="textcolor" name="game">
     <option>Find the number</option>
     <option>Mafia</option>
     <option>Quiz</option>
@@ -29,7 +29,7 @@ Go here to accept the invite: https://github.com/SeanGrayCS/xolbor-games/invitat
   <br>
   
   How did you enjoy the game?
-  <select name="rating">
+  <select class="textcolor" name="rating">
     <option>AMAZING!!!</option>
     <option>Great!</option>
     <option>OK</option>
@@ -40,7 +40,7 @@ Go here to accept the invite: https://github.com/SeanGrayCS/xolbor-games/invitat
   <br>
   
   On a scale of 1-10, would you recommend the game to a friend? 1 being never, 10 being absolutely. <br>
-  <input type="number" name="wouldRecommend" min="1" max="10" placeholder="10">
+  <input class="textcolor" type="number" name="wouldRecommend" min="1" max="10" placeholder="10">
   <br>
   <hr>
   
@@ -54,24 +54,24 @@ Go here to accept the invite: https://github.com/SeanGrayCS/xolbor-games/invitat
   <br>
   <hr>
   
-  <input type="submit" value="Submit">
+  <input class="buttoncolor" type="submit" value="Submit">
   
   <script>
     window.onload = function() {
       if (window.deviceType == 0) {
         //Browser
-        document.getElementById("improve").innerHTML = '<textarea name="improvement" rows="10" cols="194"></textarea>';
-        document.getElementById("comments").innerHTML = '<textarea name="additionalComments" rows="10" cols="194"></textarea>';
+        document.getElementById("improve").innerHTML = '<textarea class="textcolor" name="improvement" rows="10" cols="194"></textarea>';
+        document.getElementById("comments").innerHTML = '<textarea class="textcolor" name="additionalComments" rows="10" cols="194"></textarea>';
       }
       if (window.deviceType == 1) {
         //Phone
-        document.getElementById("improve").innerHTML = '<textarea name="improvement" rows="10" cols="46"></textarea>';
-        document.getElementById("comments").innerHTML = '<textarea name="additionalComments" rows="10" cols="46"></textarea>';
+        document.getElementById("improve").innerHTML = '<textarea class="textcolor" name="improvement" rows="10" cols="46"></textarea>';
+        document.getElementById("comments").innerHTML = '<textarea class="textcolor" name="additionalComments" rows="10" cols="46"></textarea>';
       }
       if (window.deviceType == 2) {
         //Tablet
-        document.getElementById("improve").innerHTML = '<textarea name="improvement" rows="10" cols="96"></textarea>';
-        document.getElementById("comments").innerHTML = '<textarea name="additionalComments" rows="10" cols="96"></textarea>';
+        document.getElementById("improve").innerHTML = '<textarea class="textcolor" name="improvement" rows="10" cols="96"></textarea>';
+        document.getElementById("comments").innerHTML = '<textarea class="textcolor" name="additionalComments" rows="10" cols="96"></textarea>';
       }
     }
   </script>
