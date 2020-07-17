@@ -46,7 +46,7 @@
     socket.on(request, (msg) => {
       console.log("client recieve")
       if (msg.gamePIN == <%= gamePIN %>) {
-        document.getElementById("players").innerHTML += '<li>' + msg.user + '</li>';
+        document.getElementById("players").innerHTML += '<tr><td>' + msg.user + '</td></tr>';
       }
     })
     socket.on('redirect', (msg) => {

@@ -34,13 +34,19 @@ var message = "";
 
 router.get("/login", (req,res) => {
   res.locals.message = message
-  backURL = req.header('Referer') || '/';
+  backURL = req.body.menu || req.header('Referer') || '/';
+  if (backURL == "undefined") {
+    backURL = '/'
+  }
   res.render("login")
 })
 
 router.post('/login',
   async (req,res,next) => {
     try {
+      if (backURL == "undefined") {
+        backURL = '/'
+      }
       const {username,passphrase} = req.body
       const hash = crypto.createHash('sha256');
       hash.update(passphrase);
@@ -66,6 +72,9 @@ router.post('/login',
 router.post('/signup',
   async (req,res,next) =>{
     try {
+      if (backURL == "undefined") {
+        backURL = '/'
+      }
       const {username,passphrase,passphrase2,email} = req.body
       const users = await User.find({username:username})
       const usersEmail = await User.find({email:email})
@@ -100,6 +109,9 @@ router.post('/signup',
 
 router.get('/logout', (req,res) => {
   backURL = req.header('Referer') || '/';
+  if (backURL == "undefined") {
+    backURL = '/'
+  }
   req.session.destroy()
   res.redirect(backURL);
 })

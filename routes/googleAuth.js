@@ -104,6 +104,7 @@ const configPassport = function(passport) {
                           googletoken: token,
                           googlename:profile.displayName,
                           googleemail:profile.emails[0].value,
+                          admin: false
                         });
 
                     // set all of the relevant information

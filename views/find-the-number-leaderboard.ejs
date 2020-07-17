@@ -6,12 +6,27 @@
     Quiz Leaderboard: 
   </h1>
   
-  <p id="data">
-    
-  </p>
+  <p id="data"></p>
+  <% var leaderList = []; %>
+  <% var counter = 0; %>
+  <% leaders.forEach (leader => { %>
+  <% leaderList[counter++] = leader %>
+  <% }) %>
+  <% var arr = leaderList; %>
+  <% var len = arr.length; %>
+  <% for (var i = len-1; i >= 0; i--){ %>
+  <% for(var j = 1; j <= i; j++){ %>
+  <% if(parseInt(arr[j-1].numGuesses) > parseInt(arr[j].numGuesses)){ %>
+  <% var temp = arr[j-1]; %>
+  <% arr[j-1] = arr[j]; %>
+  <% arr[j] = temp; %>
+  <% } %>
+  <% } %>
+  <% } %>
+  <% leaders = arr %>
   
   <p>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped bg-danger text-light">
       <thead>
         <th>Rank</th>
         <th>Username</th>

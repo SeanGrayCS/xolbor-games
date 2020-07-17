@@ -127,3 +127,8 @@ img.align-left {  float: left;  margin-right: 30px; }
   50%  {width: 70%; height: 70%;}
   100% {width: 60%; height: 60%;}
 }
+
+.textcolor {
+  color: #fff;
+  background-color: #fff;
+}

@@ -114,3 +114,15 @@ img.align-left {  float: left;  margin-right: 30px; }
   transition: 0.2s;
 }
 .fancyImage:hover {opacity: .85; transform: rotate(15deg)}
+
+.textcolor {
+  background-color: #ed5a5a;
+}
+
+.textcolor2{
+  background-color: #DB7093;
+}
+
+.buttoncolor {
+  background-color: #FFC0CB;
+}

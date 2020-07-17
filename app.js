@@ -96,6 +96,10 @@ app.get("/createGame", (req, res, next) => {
   res.render("createGame")
 })
 
+app.get("/xolcraftControlslol", (req, res, next) => {
+  res.render("xolcraftControlslol")
+})
+
 app.get("/find-the-number", (req, res) => {
   res.render("find-the-number");
 });
@@ -154,7 +158,7 @@ io.on('connection', (socket) => {
 
 app.get("/findNumberLeaderboard", async (req, res, next) => {
   try {
-    res.locals.leaders = await FindNumberLeader.find({}).sort({numGuesses:-1});
+    res.locals.leaders = await FindNumberLeader.find({}).sort({"numGuesses":-1});
     res.render("find-the-number-leaderboard");
   } catch (e) {
     next(e);
@@ -322,9 +326,8 @@ app.get('/showUsers',
   }
 })
 
-app.get('/profile', (req, res) => {
-  res.locals.userId = null
-  res.locals.user = null
+app.get('/profile', async (req, res, next) => {
+  res.locals.usern = null
   res.render('profile')
 })
 
@@ -332,7 +335,7 @@ app.get('/profile/:username', async (req, res, next) => {
   try {
     const username = req.params.username
     res.locals.name = username
-    res.locals.user = await User.findOne({username:username})
+    res.locals.usern = await User.findOne({username:username})
     res.render('profile')
   } catch(e) {
     next(e)
