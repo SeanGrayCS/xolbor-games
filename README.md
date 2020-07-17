@@ -1,37 +1,23 @@
-Welcome to Glitch
-=================
-
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
-
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
-
-Find out more [about Glitch](https://glitch.com/about).
-
-
-Your Project
-------------
-
-### ← README.md
-
-That's this file, where you can tell people what your cool website does and how you built it.
-
-### ← index.html
-
-Where you'll write the content of your website. 
-
-### ← style.css
-
-CSS files add styling rules to your content.
-
-### ← script.js
-
-If you're feeling fancy you can add interactivity to your site with JavaScript.
-
-### ← assets
-
-Drag in `assets`, like images or music, to add them to your project
-
-Made by [Glitch](https://glitch.com/)
--------------------
-
-\ ゜o゜)ノ
+# **Project Team Roles:**
+#### CO-PRESIDENTS -
+- Sean Gray, Steven Le
+#### SUBJECT MATTER EXPERT (SME) - 
+- JavaScript: Sean Gray  
+#### PROJECT MANAGERS (PM) -
+- Sean Gray, Steven Le  
+#### TECHNICAL LEAD - 
+- Sean Gray  
+#### PRIMARY BACK-END PROGRAMMER - 
+- Sean Gray  
+#### SECONDARY BACK-END PROGRAMMERS - 
+- Steven Le, Yehonatan A  
+#### PRIMARY FRONT-END PROGRAMMER - 
+- Steven Le  
+#### SECONDARY FRONT-END PROGRAMMERS - 
+- David Tarrab, Sean Gray, Yehonatan A, Maison, Noah Delgado, Victor Taveras  
+#### SOFTWARE TESTERS - 
+- Sean Gray, Steven Le, David Tarrab, Yehonatan A, Maison, Noah Delgado, Victor Taveras  
+#### USER ACCEPTANCE TESTERS - 
+- Sean Gray, Steven Le, David Tarrab, Yehonatan A, Maison, Noah Delgado, Victor Taveras  
+#### GRAPHIC DESIGNER - 
+- David Tarrab  
