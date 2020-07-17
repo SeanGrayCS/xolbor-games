@@ -132,3 +132,11 @@ img.align-left {  float: left;  margin-right: 30px; }
   color: #fff;
   background-color: #fff;
 }
+
+.textcolor2{
+  background-color: #DB7093;
+}
+
+.buttoncolor {
+  background-color: #FFC0CB;
+}

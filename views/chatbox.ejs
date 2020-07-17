@@ -1,3 +1,11 @@
+<form id="sendChat">
+  <div id="extraInputs"></div>
+  Message:
+  <input type="hidden" id="user" autocomplete="off" value="<%= username %>" />
+  <input class="textcolor" id="chat" autocomplete="off" /><button class="buttoncolor">Send</button>
+</form>
+<br>
+
 <table id="messages" class="table table-bordered table-striped bg-danger text-light">
   <thead>
     <th>Username</th>
@@ -23,13 +31,6 @@
     document.getElementById("messages").innerHTML = '<tr><td>' + chat.username + '</td><td>' + chat.message + '</td><td>' + hours + ":" + mins + ampm + '</td></tr>' + document.getElementById("messages").innerHTML;  
 </script>
 <% }) %>
-  
-<form id="sendChat">
-  <div id="extraInputs"></div>
-  Message:
-  <input type="hidden" id="user" autocomplete="off" value="<%= username %>" />
-  <input class="textcolor" id="chat" autocomplete="off" /><button>Send</button>
-</form>
   
 <script>
   document.addEventListener("DOMContentLoaded", () => {

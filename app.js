@@ -140,9 +140,11 @@ io.on('connection', (socket) => {
     const recipient = msg.recipient || ""
     const date = new Date(msg.date);
     const dateMili = date.getTime();
-    const chat = new ChatMessage({username:msg.user, room:msg.room, message:msg.msg, recipientType:recipientType, recipient:recipient, date:msg.date, dateMili:dateMili});
-    await chat.save();
-    io.emit('chat message', msg);
+    if (msg.msg !=  "") {
+      const chat = new ChatMessage({username:msg.user, room:msg.room, message:msg.msg, recipientType:recipientType, recipient:recipient, date:msg.date, dateMili:dateMili});
+      await chat.save();
+      io.emit('chat message', msg);
+    }
   });
 });
 
